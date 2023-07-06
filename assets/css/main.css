@@ -4,12 +4,21 @@
 }
 
 :root{
-    --white: #d4f4dd;
+    --white: #d6f2d7;
+    --blue: #071a50;
+
+    /* Cards */
+    --card-radius: 15px;
+    --card-padding: 15px;
+
+    /* Colores de cards */
+    --card-yellow-a: #f2d785;
+    --card-yellow-c: #ce8d2d;
 }
 
 *{
     box-sizing: border-box;
-    /*font-family: 'Nikumaru', sans-serif;*/
+    font-family: 'Nikumaru', sans-serif;
 }
 ::-webkit-scrollbar{
     width: 0;
@@ -38,4 +47,85 @@ body{
     transition: opacity 0.1s ease-in-out;
     opacity: 0;
     min-height: 100vh;
+}
+
+.fade-in{
+    opacity: 1!important;
+}
+
+.card{
+    position: relative;
+    display: grid;
+    grid-template-rows: auto max-content;
+    width: 592px;
+    height: 828px;
+    border-radius: var(--card-radius);
+    padding: var(--card-padding);
+    background-color: var(--white);
+}
+
+.card .text{
+    position: relative;
+    z-index: 1;
+}
+
+.card .text::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    z-index: -1;
+    -webkit-text-stroke: 4px var(--white);
+    font-size: 1em;
+}
+
+.card > .background{
+    position: absolute;
+    top: var(--card-padding);
+    left: var(--card-padding);
+    bottom: var(--card-padding);
+    right: var(--card-padding);
+    border-radius: var(--card-radius);
+    background-color: var(--card-yellow-a);
+}
+
+.card > .content{
+    position: relative;
+    display: grid;
+    grid-template-rows: max-content auto;
+    padding: var(--card-padding);
+    color: var(--blue);
+}
+
+.card > .content > .header{
+    display: grid;
+    justify-content: center;
+    justify-items: center;
+    align-items: baseline;
+    grid-auto-rows: max-content;
+}
+
+.card > .content > .header > .name{
+    font-size: 3em;
+}
+
+.card > .content > .header > .team{
+    font-size: 1.5em;
+}
+
+.card > .footer{
+    display: grid;
+    height: 76px;
+    background-color: var(--card-yellow-c);
+    z-index: 1;
+    border-radius: 0px 0px var(--card-radius) var(--card-radius);
+}
+
+.card > .border{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border: var(--card-padding) solid var(--white);
+    border-radius: var(--card-radius);
 }
