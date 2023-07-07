@@ -36,7 +36,7 @@ nameInput.addEventListener("input", e => {
 // Compartir card
 const shareCard = async _ => {
     var card = document.querySelector(".container");
-    html2canvas(card, {windowWidth: 540, windowHeight: 960, backgroundColor: null, useCORS: true}).then(async (canvas) => {
+    html2canvas(card, {windowWidth: 540, windowHeight: 960, backgroundColor: "#4cbcf8", allowTaint: true, useCORS: true}).then(async (canvas) => {
         // TODO: Descargar imagen si no puede compartir
         //var link = document.createElement("a");
         //document.body.appendChild(link);

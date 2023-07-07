@@ -65,6 +65,9 @@ body{
     left: 0;
     bottom: 0;
     right: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    background-color: #4cbcf8;
 }
 
 .card{

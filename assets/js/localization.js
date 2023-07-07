@@ -1,7 +1,7 @@
 class Localization{
 
     // Idiomas validos
-    static validLanguage = [ "en", "es", "es-cl", "ja", "fr", "it", "ru" ];
+    static validLanguage = [ "en", "es", "ja", "fr", "it", "ru" ];
     static allowedCompoundLanguage = [ "es-cl" ];
 
     // Main
@@ -10,11 +10,13 @@ class Localization{
         return {
 
             en: {
-
+                name: "Name",
+                share: "Share"
             },
 
             es: {
-                
+                name: "Nombre",
+                share: "Compartir"
             },
 
             ja: {
@@ -42,7 +44,7 @@ class Localization{
     }
 
     // Solicitar un texto para incluir
-    static GetTranslate( page, key, element, values ){
+    static GetTranslate( page, key, values, element, attributeTarget ){
         
         let language = navigator.language.toLowerCase();
 
@@ -79,8 +81,14 @@ class Localization{
 
         }
         
-        if(string) element.innerHTML = string;
+        if(string){
+            if(element){
+                if(attributeTarget) element.setAttribute( attributeTarget, string);
+                else element.innerHTML = string;
+            }   
+        }
 
+        return string? string : ''; 
     }
 
 }
@@ -88,5 +96,5 @@ class Localization{
 // Procesar todas los textos que necesiten localizacion
 const needLocalization = Array.from( document.querySelectorAll( "[data-localization-key]" ) );
 for( const e of needLocalization ){
-    Localization.GetTranslate(e.dataset.localizationPage, e.dataset.localizationKey, e, e.dataset.localizationArguments);
+    Localization.GetTranslate(e.dataset.localizationPage, e.dataset.localizationKey, e.dataset.localizationArguments, e, e.dataset.localizationAttribute);
 }

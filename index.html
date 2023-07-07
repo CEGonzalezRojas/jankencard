@@ -11,15 +11,15 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon.png">
     <link href="/assets/css/main.css" type="text/css" rel="stylesheet">
 </head>
-<body data-url="https://jankenupserver.s3.us-west-2.amazonaws.com/assets/images/texture2.png" data-lazy="true" data-lazy_type="background">
+<body class="fade-in">
     
-    <div class="container">
+    <div class="container" data-url="/assets/images/others/texture.png" data-lazy="true" data-lazy_type="background">
         <div class="card">
             <div class="background"></div>
             <div class="content">
                 <div class="header">
                     <div class="input name">
-                        <input placeholder="Paltita"/ maxlength="10" spellcheck="false">
+                        <input maxlength="10" spellcheck="false" data-localization-page="main" data-localization-key="name" data-localization-attribute="placeholder"/>
                         <span class="text"></span>
                     </div>
                     <div class="team text" data-text="Team Rock"></div>
@@ -34,7 +34,7 @@
     </div>
 
     <div class="actions">
-        <div class="button" data-action="share">Compartir</div>
+        <div class="button" data-action="share" data-localization-page="main" data-localization-key="share"></div>
     </div>
 
     <script src="/assets/js/localization.js"></script>
