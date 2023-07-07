@@ -26,7 +26,7 @@ const shareCard = _ => {
 
         
 
-        shareFile(dataURItoBlob(canvas.toDataURL()), "JanKenUP! Card");
+        shareFile(dataURLtoFile(canvas.toDataURL()), "JanKenUP! Card");
         
         //link.download = "html_image.jpg";
         //link.href = canvas.toDataURL();
