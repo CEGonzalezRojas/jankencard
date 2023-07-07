@@ -129,7 +129,6 @@ body{
     bottom: var(--card-padding);
     right: var(--card-padding);
     border-radius: var(--card-radius);
-    background-color: var(--card-yellow-a);
     transition: background-color .2s ease-in-out;
 }
 
@@ -143,6 +142,7 @@ body{
 
 .card > .content > .header{
     display: grid;
+    gap: 10px;
     justify-content: center;
     justify-items: center;
     align-items: baseline;
@@ -198,11 +198,35 @@ body{
 
 .card > .footer{
     display: grid;
+    grid-auto-flow: column;
+    justify-content: space-between;
+    justify-items: center;
+    align-items: center;
+    position: relative;
     height: 76px;
     background-color: var(--card-yellow-b);
+    padding: 0px 20px;
     z-index: 1;
     border-radius: 0px 0px var(--card-radius) var(--card-radius);
     transition: background-color 0.2s ease-in-out;
+    pointer-events: none;
+    user-select: none;
+}
+
+.card > .footer > .ranking{
+    color: var(--blue);
+    font-size: 2em;
+}
+
+.card > .footer > .ql-points{
+    display: grid;
+    justify-content: flex-end;
+    align-items: center;
+    width: 155px;
+    height: 51px;
+    padding-right: 15px;
+    color: var(--blue);
+    font-size: 1.5em;
 }
 
 .card > .border{
