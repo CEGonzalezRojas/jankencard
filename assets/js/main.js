@@ -188,9 +188,9 @@
         {
             url: "/assets/images/characters/arataka.png",
             style: {
-                width: "80%",
-                top: "0",
-                right: "-40px"
+                width: "72%",
+                top: "108px",
+                left: "-30px"
             },
             colors: {
                 card: '--card-gray-a',
