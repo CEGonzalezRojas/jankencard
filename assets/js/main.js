@@ -26,7 +26,7 @@ const shareCard = _ => {
 
         
 
-        shareFile(dataURLtoFile(canvas.toDataURL(), "JankenCard"), "JanKenUP! Card");
+        shareFile(dataURItoBlob(canvas.toDataURL()), "JanKenUP! Card");
         
         //link.download = "html_image.jpg";
         //link.href = canvas.toDataURL();
@@ -35,13 +35,21 @@ const shareCard = _ => {
     });
 }
 
-const dataURLtoFile = (dataurl, filename) => {
-    var blobBin = atob(dataurl.split(',')[1]);
-    var array = [];
-    for(var i = 0; i < blobBin.length; i++) {
-        array.push(blobBin.charCodeAt(i));
+const dataURLtoFile = (dataURI) => {
+    // convert base64/URLEncoded data component to raw binary data held in a string
+    var byteString;
+    if (dataURI.split(',')[0].indexOf('base64') >= 0)
+        byteString = atob(dataURI.split(',')[1]);
+    else
+        byteString = unescape(dataURI.split(',')[1]);
+    // separate out the mime component
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+    // write the bytes of the string to a typed array
+    var ia = new Uint8Array(byteString.length);
+    for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
     }
-    return new Blob([new Uint8Array(array)], {type: 'image/png'});
+    return new Blob([ia], {type:mimeString});
 };
 
 const shareFile = (file, title, text) => {
