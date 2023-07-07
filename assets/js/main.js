@@ -218,8 +218,8 @@
 
     const characterUpdate = _ => {
         const selectedCharacter = characters[characterIndex];
-        lazyLoad.preload( selectedCharacter.url, characterDisplayer, "img" );
-        lazyLoad.preload( selectedCharacter.mask, cardBackgroundMask, "background" );
+        lazyLoad.preload( `/jankencard${selectedCharacter.url}`, characterDisplayer, "img" );
+        lazyLoad.preload( `/jankencard${selectedCharacter.mask}`, cardBackgroundMask, "background" );
     };
     characterDisplayer.addEventListener("lazyLoad", _ => {
         const selectedCharacter = characters[characterIndex];
