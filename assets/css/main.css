@@ -18,8 +18,8 @@
     --card-yellow-a: #f2d785;
     --card-yellow-b: #ce8d2d;
 
-    --card-orange-a: #ff7c48;
-    --card-orange-b: #ba2626;
+    --card-red-a: #ff7c48;
+    --card-red-b: #ba2626;
 
     --card-blue-a: #57698e;
     --card-blue-b: #393459;
@@ -130,17 +130,13 @@ body{
     right: var(--card-padding);
     border-radius: var(--card-radius);
     transition: background-color .2s ease-in-out;
+    overflow: hidden;
 }
 
 .card > .background > .mask{
     width: 100%;
     height: 100%;
-    border-radius: var(--card-radius);
-    transition: background-color .2s ease-in-out;
-    background-color: rgba(0,0,0,.2);
-    -webkit-mask-image: url(/assets/images/others/card-mask.png);
-    -webkit-mask-size: cover;
-    mask-image: url(/assets/images/others/card-mask.png);   
+    background-size: cover;
 }
 
 .card > .content{
@@ -222,6 +218,7 @@ body{
     transition: background-color 0.2s ease-in-out;
     pointer-events: none;
     user-select: none;
+    background-color: transparent!important;
 }
 
 .card > .footer > .ranking{

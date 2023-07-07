@@ -21,6 +21,7 @@
     // Elementos comunes
     const card = document.querySelector(".card");
     const cardBackground = card.querySelector(".background");
+    const cardBackgroundMask = cardBackground.querySelector(".mask");
     const cardFooter = card.querySelector(".footer");
     const nameInput = card.querySelector(".name input");
     const nameDisplayer = card.querySelector(".name span");
@@ -48,25 +49,27 @@
         {
             url: "/assets/images/characters/ryusei.png",
             style: {
-                width: "96%",
-                top: "-10px",
+                width: "90%",
+                top: "30px",
                 right: "-30px"
             },
             colors: {
                 card: '--card-yellow-a',
                 footer: '--card-yellow-b'
-            }
+            },
+            mask: "/assets/images/others/mask/card-mask-yellow.png"
         },
         {
             url: "/assets/images/characters/jade.png",
             style: {
-                width: "96%",
-                right: "-30px"
+                width: "91%",
+                left: "-30px"
             },
             colors: {
-                card: '--card-orange-a',
-                footer: '--card-orange-b'
-            }
+                card: '--card-red-a',
+                footer: '--card-red-b'
+            },
+            mask: "/assets/images/others/mask/card-mask-red.png"
         },
         {
             url: "/assets/images/characters/oriax.png",
@@ -74,37 +77,39 @@
                 width: "41%",
                 transform: "rotate(-20deg)",
                 top: "69px",
-                left: "100px"
+                left: "46px"
             },
             colors: {
                 card: '--card-blue-a',
                 footer: '--card-blue-b'
-            }
+            },
+            mask: "/assets/images/others/mask/card-mask-blue.png"
         },
         {
             url: "/assets/images/characters/sakura.png",
             style: {
                 width: "110%",
-                bottom: "40px",
+                bottom: "0px",
                 right: "-40px"
             },
             colors: {
                 card: '--card-pink-a',
                 footer: '--card-pink-b'
-            }
+            },
+            mask: "/assets/images/others/mask/card-mask-pink.png"
         },
         {
             url: "/assets/images/characters/joaquin.png",
             style: {
-                width: "93%",
-                top: "50px",
-                left: "-2px",
-                transform: "rotate(-15deg)"
+                width: "86%",
+                bottom: "-86px",
+                left: "-46px",
             },
             colors: {
                 card: '--card-sky-a',
                 footer: '--card-sky-b'
-            }
+            },
+            mask: "/assets/images/others/mask/card-mask-sky.png"
         },
         {
             url: "/assets/images/characters/airini.png",
@@ -115,63 +120,70 @@
             colors: {
                 card: '--card-gray-a',
                 footer: '--card-gray-b'
-            }
+            },
+            mask: "/assets/images/others/mask/card-mask-gray.png"
         },
         {
             url: "/assets/images/characters/barry.png",
             style: {
-                width: "74%",
-                right: "76px"
+                width: "72%",
+                left: "-20px"
             },
             colors: {
-                card: '--card-orange-a',
-                footer: '--card-orange-b'
-            }
+                card: '--card-red-a',
+                footer: '--card-red-b'
+            },
+            mask: "/assets/images/others/mask/card-mask-red-b.png"
         },
         {
             url: "/assets/images/characters/misae.png",
             style: {
-                width: "92%",
-                right: "76px"
+                width: "83%",
+                left: "-41px",
+                bottom: "-91px"
             },
             colors: {
                 card: '--card-pink-a',
                 footer: '--card-pink-b'
-            }
+            },
+            mask: "/assets/images/others/mask/card-mask-pink-b.png"
         },
         {
             url: "/assets/images/characters/matsuo.png",
             style: {
-                width: "92%",
-                right: "-40px"
+                width: "88%",
+                right: "-30px"
             },
             colors: {
                 card: '--card-green-a',
                 footer: '--card-green-b'
-            }
+            },
+            mask: "/assets/images/others/mask/card-mask-green.png"
         },
         {
             url: "/assets/images/characters/juanita.png",
             style:{
-                width: "65%",
+                width: "61%",
                 left: "-30px"
             },
             colors: {
                 card: '--card-purple-a',
                 footer: '--card-purple-b'
-            }
+            },
+            mask: "/assets/images/others/mask/card-mask-purple.png"
         },
         {
             url: "/assets/images/characters/duo.png",
             style:{
-                width: "96%",
-                left: "-50px",
-                bottom: "-10px"
+                width: "90%",
+                left: "-40px",
+                bottom: "0px"
             },
             colors: {
                 card: '--card-blue-a',
                 footer: '--card-blue-b'
-            }
+            },
+            mask: "/assets/images/others/mask/card-mask-blue-b.png"
         },
         {
             url: "/assets/images/characters/arataka.png",
@@ -183,7 +195,8 @@
             colors: {
                 card: '--card-gray-a',
                 footer: '--card-gray-b'
-            }
+            },
+            mask: "/assets/images/others/mask/card-mask-gray-b.png"
         }
     ];
 
@@ -206,6 +219,7 @@
     const characterUpdate = _ => {
         const selectedCharacter = characters[characterIndex];
         lazyLoad.preload( selectedCharacter.url, characterDisplayer, "img" );
+        lazyLoad.preload( selectedCharacter.mask, cardBackgroundMask, "background" );
     };
     characterDisplayer.addEventListener("lazyLoad", _ => {
         const selectedCharacter = characters[characterIndex];
