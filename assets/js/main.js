@@ -18,54 +18,39 @@ function Fade(event){
 })();
 
 // Compartir card
-const shareCard = _ => {
+const shareCard = async _ => {
     var card = document.querySelector("body");
-    html2canvas(card, {windowWidth: 540, windowHeight: 960, backgroundColor: null}).then((canvas) => {
+    html2canvas(card, {windowWidth: 540, windowHeight: 960, backgroundColor: null}).then(async (canvas) => {
         //var link = document.createElement("a");
         //document.body.appendChild(link);
 
         
 
-        shareFile(dataURLtoFile(canvas.toDataURL()), "JanKenUP! Card");
+        //shareFile(dataURLtoFile(canvas.toDataURL()), "JanKenUP! Card");
         
         //link.download = "html_image.jpg";
         //link.href = canvas.toDataURL();
         //link.target = '_blank';
         //link.click();
+
+        const dataUrl = canvas.toDataURL();
+        const blob = await (await fetch(dataUrl)).blob();
+        const filesArray = [
+            new File(
+            [blob],
+            'animation.png',
+            {
+                type: blob.type,
+                lastModified: new Date().getTime()
+            }
+            )
+        ];
+        const shareData = {
+            files: filesArray,
+        };
+        navigator.share(shareData);
     });
 }
-
-const dataURLtoFile = (dataURI) => {
-    // convert base64/URLEncoded data component to raw binary data held in a string
-    var byteString;
-    if (dataURI.split(',')[0].indexOf('base64') >= 0)
-        byteString = atob(dataURI.split(',')[1]);
-    else
-        byteString = unescape(dataURI.split(',')[1]);
-    // separate out the mime component
-    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-    // write the bytes of the string to a typed array
-    var ia = new Uint8Array(byteString.length);
-    for (var i = 0; i < byteString.length; i++) {
-        ia[i] = byteString.charCodeAt(i);
-    }
-    return new Blob([ia], {type:mimeString});
-};
-
-const shareFile = (file, title, text) => {
-    if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        navigator
-        .share({
-            files: [file],
-            title,
-            text
-        })
-        .then(() => console.log("Share was successful."))
-        .catch((error) => console.log("Sharing failed", error));
-    } else {
-        console.log(`Your system doesn't support sharing files.`);
-    }
-};
 
 document.querySelector(".card").addEventListener("mouseup", _ => {
     shareCard();
