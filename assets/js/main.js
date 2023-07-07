@@ -23,7 +23,10 @@ const shareCard = _ => {
     html2canvas(card, {windowWidth: 540, windowHeight: 960, backgroundColor: null}).then((canvas) => {
         //var link = document.createElement("a");
         //document.body.appendChild(link);
-        shareFile(canvas.toDataURL(), "JanKenUP! Card");
+
+        
+
+        shareFile(dataURLtoFile(canvas.toDataURL(), "JankenCard"), "JanKenUP! Card");
         
         //link.download = "html_image.jpg";
         //link.href = canvas.toDataURL();
@@ -31,6 +34,18 @@ const shareCard = _ => {
         //link.click();
     });
 }
+
+export const dataURLtoFile = (dataurl, filename) => {
+    var arr = dataurl.split(","),
+        mimeType = arr[0].match(/:(.*?);/)[1],
+        decodedData = atob(arr[1]),
+        lengthOfDecodedData = decodedData.length,
+        u8array = new Uint8Array(lengthOfDecodedData);
+    while (lengthOfDecodedData--) {
+        u8array[lengthOfDecodedData] = decodedData.charCodeAt(lengthOfDecodedData);
+    }
+    return new File([u8array], filename, { type: mimeType });
+};
 
 const shareFile = (file, title, text) => {
     if (navigator.canShare && navigator.canShare({ files: [file] })) {
