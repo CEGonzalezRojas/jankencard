@@ -35,7 +35,7 @@ const shareCard = _ => {
     });
 }
 
-export const dataURLtoFile = (dataurl, filename) => {
+const dataURLtoFile = (dataurl, filename) => {
     var blobBin = atob(dataurl.split(',')[1]);
     var array = [];
     for(var i = 0; i < blobBin.length; i++) {
