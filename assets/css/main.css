@@ -7,6 +7,9 @@
     --white: #d6f2d7;
     --blue: #071a50;
 
+    /* Sombras */
+    --main-shadow: 10px 10px #071a5060;
+
     /* Cards */
     --card-radius: 15px;
     --card-padding: 15px;
@@ -74,7 +77,7 @@ body{
     position: absolute;
     left: 0;
     z-index: -1;
-    -webkit-text-stroke: 4px var(--white);
+    -webkit-text-stroke: 6px var(--white);
     font-size: 1em;
 }
 
@@ -105,11 +108,25 @@ body{
 }
 
 .card > .content > .header > .name{
-    font-size: 3em;
+    font-size: 4em;
 }
 
 .card > .content > .header > .team{
-    font-size: 1.5em;
+    font-size: 2.2em;
+}
+
+.card > .content > .body{}
+
+.card > .content > .body > .character{
+    position: absolute;
+    z-index: 2;
+    filter: drop-shadow(var(--main-shadow));
+    pointer-events: none;
+    user-select: none;
+    /*Variables*/
+    width: 96%;
+    top: -10px;
+    right: -30px;
 }
 
 .card > .footer{
