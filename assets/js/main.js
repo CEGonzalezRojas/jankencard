@@ -17,17 +17,30 @@ function Fade(event){
     if(humitaYear) humitaYear.dataset.year =  new Date().getFullYear();
 })();
 
+// Cambio de nombre
+const nameInput = document.querySelector(".card .name input");
+const nameDisplayer = document.querySelector(".card .name span");
+const changeName = name => {
+    nameDisplayer.dataset.text = name;
+}
+nameInput.addEventListener("keydown", e => {
+    if(e.code == "Space") e.preventDefault();
+});
+nameInput.addEventListener("input", e => {
+    if(nameInput.value.length >= nameInput.getAttribute("maxlength")){
+        nameInput.value = nameInput.value.substring(0, nameInput.getAttribute("maxlength"));
+    }
+    changeName(nameInput.value);
+});
+
 // Compartir card
 const shareCard = async _ => {
-    var card = document.querySelector("body");
-    html2canvas(card, {windowWidth: 540, windowHeight: 960, backgroundColor: null}).then(async (canvas) => {
+    var card = document.querySelector(".container");
+    html2canvas(card, {windowWidth: 540, windowHeight: 960, backgroundColor: null, useCORS: true}).then(async (canvas) => {
+        // TODO: Descargar imagen si no puede compartir
         //var link = document.createElement("a");
         //document.body.appendChild(link);
-
-        
-
         //shareFile(dataURLtoFile(canvas.toDataURL()), "JanKenUP! Card");
-        
         //link.download = "html_image.jpg";
         //link.href = canvas.toDataURL();
         //link.target = '_blank';
@@ -52,6 +65,6 @@ const shareCard = async _ => {
     });
 }
 
-document.querySelector(".card").addEventListener("mouseup", _ => {
+document.querySelector("[data-action=share]").addEventListener("click", _ => {
     shareCard();
 })

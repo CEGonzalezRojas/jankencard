@@ -1,6 +1,6 @@
 @font-face {
     font-family:'Nikumaru';
-    src: url(/jankencard/assets/fonts/nikumaru.otf);
+    src: url(/assets/fonts/nikumaru.otf);
 }
 
 :root{
@@ -56,6 +56,17 @@ body{
     opacity: 1!important;
 }
 
+.container{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
 .card{
     position: relative;
     display: grid;
@@ -64,12 +75,18 @@ body{
     height: 680px;
     border-radius: var(--card-radius);
     padding: var(--card-padding);
+    margin: 0px 20px;
     background-color: var(--white);
+    transition: transform 0.2s ease-in-out;
 }
 
 .card .text{
     position: relative;
     z-index: 1;
+}
+
+.card .text::before {
+    content: attr(data-text);
 }
 
 .card .text::after {
@@ -108,7 +125,34 @@ body{
 }
 
 .card > .content > .header > .name{
+    display: grid;
+    justify-items: center;
+    position: relative;
     font-size: 4em;
+}
+
+.card > .content > .header > .name > *{
+    font-size: inherit;
+    text-align: center;
+}
+
+.card > .content > .header > .name > input{
+    background-color: transparent;
+    border: none;
+    color: transparent;
+    caret-color: var(--blue);
+    width: 80%;
+}
+
+.card > .content > .header > .name > input:focus{
+    outline: none;
+}
+
+.card > .content > .header > .name > span{
+    position: absolute;
+    margin-top: 3px;
+    pointer-events: none;
+    width: max-content;
 }
 
 .card > .content > .header > .team{
@@ -144,4 +188,38 @@ body{
     right: 0;
     border: var(--card-padding) solid var(--white);
     border-radius: var(--card-radius);
+    pointer-events: none;
+}
+
+@media (max-width: 540px) {
+    .card{
+        transform: scale(.7);
+    }
+}
+
+@media (max-width: 380px) {
+    .card{
+        transform: scale(.6);
+    }
+}
+
+/* Actions */
+.actions{
+    display: grid;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.button{
+    display: grid;
+    padding: var(--card-padding) 50px;
+    background-color: var(--blue);
+    border: 4px solid var(--white);
+    border-bottom: none;
+    border-radius: var(--card-padding) var(--card-radius) 0px 0px;
+    cursor: pointer;
+    user-select: none;
 }

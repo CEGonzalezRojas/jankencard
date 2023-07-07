@@ -8,29 +8,38 @@
     <meta name="theme-color" content="#3cb3bd"/>
     <meta name="description" content="JanKenUp! TCG"/>
 	<title>JanKenUp! Card</title>
-    <link rel="icon" type="image/png" sizes="32x32" href="/jankencard/assets/images/favicon.png">
-    <link href="/jankencard/assets/css/main.css" type="text/css" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon.png">
+    <link href="/assets/css/main.css" type="text/css" rel="stylesheet">
 </head>
 <body data-url="https://jankenupserver.s3.us-west-2.amazonaws.com/assets/images/texture2.png" data-lazy="true" data-lazy_type="background">
     
-    <div class="card">
-        <div class="background"></div>
-        <div class="content">
-            <div class="header">
-                <div class="name text" data-text="Paltita">Paltita</div>
-                <div class="team text" data-text="Team Rock">Team Rock</div>
+    <div class="container">
+        <div class="card">
+            <div class="background"></div>
+            <div class="content">
+                <div class="header">
+                    <div class="input name">
+                        <input placeholder="Paltita"/ maxlength="10" spellcheck="false">
+                        <span class="text"></span>
+                    </div>
+                    <div class="team text" data-text="Team Rock"></div>
+                </div>
+                <div class="body">
+                    <img class="character" data-url="/assets/images/characters/ryusei.png" data-lazy="true" data-lazy_type="img"/>
+                </div>
             </div>
-            <div class="body">
-                <img class="character" data-url="/jankencard//assets/images/characters/ryusei.png" data-lazy="true" data-lazy_type="img"/>
-            </div>
+            <div class="footer"></div>
+            <div class="border"></div>
         </div>
-        <div class="footer"></div>
-        <div class="border"></div>
     </div>
 
-    <script src="/jankencard/assets/js/localization.js"></script>
-    <script src="/jankencard/assets/js/lazyLoad.js"></script>
-    <script src="/jankencard/assets/js/html2canvas.js"></script>
-    <script src="/jankencard/assets/js/main.js"></script>
+    <div class="actions">
+        <div class="button" data-action="share">Compartir</div>
+    </div>
+
+    <script src="/assets/js/localization.js"></script>
+    <script src="/assets/js/lazyLoad.js"></script>
+    <script src="/assets/js/html2canvas.js"></script>
+    <script src="/assets/js/main.js"></script>
 </body>
 </html>
