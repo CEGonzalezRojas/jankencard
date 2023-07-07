@@ -11,12 +11,14 @@ class Localization{
 
             en: {
                 name: "Name",
-                share: "Share"
+                share: "Share",
+                change: "Change"
             },
 
             es: {
                 name: "Nombre",
-                share: "Compartir"
+                share: "Compartir",
+                change: "Cambiar"
             },
 
             ja: {

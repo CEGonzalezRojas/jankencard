@@ -16,7 +16,28 @@
 
     /* Colores de cards */
     --card-yellow-a: #f2d785;
-    --card-yellow-c: #ce8d2d;
+    --card-yellow-b: #ce8d2d;
+
+    --card-orange-a: #ff7c48;
+    --card-orange-b: #ba2626;
+
+    --card-blue-a: #57698e;
+    --card-blue-b: #393459;
+
+    --card-pink-a: #ffb091;
+    --card-pink-b: #d34c41;
+
+    --card-sky-a: #9ac8cb;
+    --card-sky-b: #709aa3;
+
+    --card-gray-a: #8b7f7a;
+    --card-gray-b: #6c5855;
+
+    --card-green-a: #8c9f80;
+    --card-green-b: #5f856f;
+
+    --card-purple-a: #918ac0;
+    --card-purple-b: #57698e;
 }
 
 *{
@@ -109,6 +130,7 @@ body{
     right: var(--card-padding);
     border-radius: var(--card-radius);
     background-color: var(--card-yellow-a);
+    transition: background-color .2s ease-in-out;
 }
 
 .card > .content{
@@ -132,6 +154,7 @@ body{
     justify-items: center;
     position: relative;
     font-size: 4em;
+    z-index: 99;
 }
 
 .card > .content > .header > .name > *{
@@ -145,6 +168,7 @@ body{
     color: transparent;
     caret-color: var(--blue);
     width: 80%;
+    z-index: 2;
 }
 
 .card > .content > .header > .name > input:focus{
@@ -156,6 +180,7 @@ body{
     margin-top: 3px;
     pointer-events: none;
     width: max-content;
+    
 }
 
 .card > .content > .header > .team{
@@ -169,18 +194,15 @@ body{
     z-index: 2;
     pointer-events: none;
     user-select: none;
-    /*Variables*/
-    width: 96%;
-    top: -10px;
-    right: -30px;
 }
 
 .card > .footer{
     display: grid;
     height: 76px;
-    background-color: var(--card-yellow-c);
+    background-color: var(--card-yellow-b);
     z-index: 1;
     border-radius: 0px 0px var(--card-radius) var(--card-radius);
+    transition: background-color 0.2s ease-in-out;
 }
 
 .card > .border{
@@ -209,6 +231,8 @@ body{
 /* Actions */
 .actions{
     display: grid;
+    grid-auto-flow: column;
+    gap: 20px;
     justify-content: center;
     position: fixed;
     bottom: 0;

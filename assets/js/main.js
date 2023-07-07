@@ -17,6 +17,11 @@ function Fade(event){
     if(humitaYear) humitaYear.dataset.year =  new Date().getFullYear();
 })();
 
+// Elementos comunes
+const card = document.querySelector(".card");
+const cardBackground = card.querySelector(".background");
+const cardFooter = card.querySelector(".footer");
+
 // Cambio de nombre
 const nameInput = document.querySelector(".card .name input");
 const nameDisplayer = document.querySelector(".card .name span");
@@ -32,6 +37,179 @@ nameInput.addEventListener("input", e => {
     }
     changeName(nameInput.value);
 });
+
+// Cambio de personaje
+const characters = [
+    {
+        url: "/assets/images/characters/ryusei.png",
+        style: {
+            width: "96%",
+            top: "-10px",
+            right: "-30px"
+        },
+        colors: {
+            card: '--card-yellow-a',
+            footer: '--card-yellow-b'
+        }
+    },
+    {
+        url: "/assets/images/characters/jade.png",
+        style: {
+            width: "96%",
+            right: "-30px"
+        },
+        colors: {
+            card: '--card-orange-a',
+            footer: '--card-orange-b'
+        }
+    },
+    {
+        url: "/assets/images/characters/oriax.png",
+        style: {
+            width: "41%",
+            transform: "rotate(-20deg)",
+            top: "69px",
+            left: "100px"
+        },
+        colors: {
+            card: '--card-blue-a',
+            footer: '--card-blue-b'
+        }
+    },
+    {
+        url: "/assets/images/characters/sakura.png",
+        style: {
+            width: "110%",
+            bottom: "40px",
+            right: "-40px"
+        },
+        colors: {
+            card: '--card-pink-a',
+            footer: '--card-pink-b'
+        }
+    },
+    {
+        url: "/assets/images/characters/joaquin.png",
+        style: {
+            width: "93%",
+            top: "50px",
+            left: "-2px",
+            transform: "rotate(-15deg)"
+        },
+        colors: {
+            card: '--card-sky-a',
+            footer: '--card-sky-b'
+        }
+    },
+    {
+        url: "/assets/images/characters/airini.png",
+        style: {
+            width: "100%",
+            left: "-40px"
+        },
+        colors: {
+            card: '--card-gray-a',
+            footer: '--card-gray-b'
+        }
+    },
+    {
+        url: "/assets/images/characters/barry.png",
+        style: {
+            width: "74%",
+            right: "76px"
+        },
+        colors: {
+            card: '--card-orange-a',
+            footer: '--card-orange-b'
+        }
+    },
+    {
+        url: "/assets/images/characters/misae.png",
+        style: {
+            width: "92%",
+            right: "76px"
+        },
+        colors: {
+            card: '--card-pink-a',
+            footer: '--card-pink-b'
+        }
+    },
+    {
+        url: "/assets/images/characters/matsuo.png",
+        style: {
+            width: "92%",
+            right: "-40px"
+        },
+        colors: {
+            card: '--card-green-a',
+            footer: '--card-green-b'
+        }
+    },
+    {
+        url: "/assets/images/characters/juanita.png",
+        style:{
+            width: "65%",
+            left: "-30px"
+        },
+        colors: {
+            card: '--card-purple-a',
+            footer: '--card-purple-b'
+        }
+    },
+    {
+        url: "/assets/images/characters/duo.png",
+        style:{
+            width: "96%",
+            left: "-50px",
+            bottom: "-10px"
+        },
+        colors: {
+            card: '--card-blue-a',
+            footer: '--card-blue-b'
+        }
+    },
+    {
+        url: "/assets/images/characters/arataka.png",
+        style: {
+            width: "80%",
+            top: "0",
+            right: "-40px"
+        },
+        colors: {
+            card: '--card-gray-a',
+            footer: '--card-gray-b'
+        }
+    }
+];
+const characterDisplayer = document.querySelector(".card .character");
+let characterIndex = 0;
+const characterIndexUpdate = (direction = 1) => {
+    characterIndex += direction > 0? 1 : -1;
+    if(characterIndex >= characters.length) characterIndex = 0;
+    else if(characterIndex < 0) characterIndex = characters.length - 1;
+    characterUpdate();
+}
+const characterUpdate = _ => {
+    const selectedCharacter = characters[characterIndex];
+    lazyLoad.preload( selectedCharacter.url, characterDisplayer, "img" );
+};
+characterDisplayer.addEventListener("lazyLoad", _ => {
+    const selectedCharacter = characters[characterIndex];
+    
+    // Cambios de estilo
+    let style = "";
+    for(let prop in selectedCharacter.style){
+        style = `${style} ${prop}: ${selectedCharacter.style[prop]};`;
+    }
+    characterDisplayer.style = style;
+
+    // Estilo card
+    cardBackground.style.backgroundColor = `var(${selectedCharacter.colors.card})`;
+    cardFooter.style.backgroundColor = `var(${selectedCharacter.colors.footer})`;
+});
+
+// Primera carga
+characterUpdate();
 
 // Compartir card
 const shareCard = async _ => {
@@ -65,6 +243,8 @@ const shareCard = async _ => {
     });
 }
 
+/** Botones */
+document.querySelector("[data-action=change]").addEventListener("click", _ => { characterIndexUpdate(); });
 document.querySelector("[data-action=share]").addEventListener("click", _ => {
     shareCard();
 })

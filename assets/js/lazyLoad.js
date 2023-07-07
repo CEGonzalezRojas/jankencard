@@ -82,7 +82,7 @@ class LazyLoad{
         
     }
     
-    preload( url, element, type ){
+    preload( url, element, type, callback ){
 
         if( !url ) return;
         
