@@ -301,6 +301,23 @@
                 right: "20px",
                 top: "40%"
             }
+        },
+        {
+            url: "/assets/images/characters/salfate.png",
+            style: {
+                width: "113%",
+                right: "-40px",
+                bottom: "0"
+            },
+            colors: {
+                card: '--card-blue-a',
+                footer: '--card-blue-b',
+                cardEffect: 0x57698e
+            },
+            mask: "/assets/images/others/mask/card-mask-gray-b.png",
+            stats: {
+                top: "30%"
+            }
         }
     ];
 
@@ -342,12 +359,16 @@
         }
         characterStats.style = statsStyle;
 
+        // Mostrar card
+        card.classList.remove("show");
+        void card.offsetWidth;
+        card.classList.add("show");
+
         // Estilo card
         cardBackground.style.backgroundColor = `var(${selectedCharacter.colors.card})`;
         cardFooter.style.backgroundColor = `var(${selectedCharacter.colors.footer})`;
 
         // Efecto
-        wavesContainer.setOptions({ color: selectedCharacter.colors.backgroundEffect });
         wavesBackground.setOptions({ color: selectedCharacter.colors.cardEffect });
     });
 
@@ -458,6 +479,9 @@
 
     // Compartir card
     const shareCard = async _ => {
+        // Remover animacion
+        card.classList.remove("show");
+
         html2canvas(container, {width: 540, windowWidth: 540, height: 960, windowHeight: 960, backgroundColor: "#4cbcf8", allowTaint: true, useCORS: true, ignoreElements: element => {
             if(element.classList.contains("changers")) return true;
         }}).then(async (canvas) => {
