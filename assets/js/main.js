@@ -357,9 +357,30 @@
     }
 
     const attacksRandom = _ => {
-        const randomRock = Math.floor(Math.random() * attacks.max) + 1;
-        const randomPaper = Math.floor(Math.random() * ( attacks.max - randomRock ) ) + 1;
-        const randomScissors = Math.floor(Math.random() * ( attacks.max - randomRock - randomPaper )) + 1;
+        let randomRock = Math.floor(Math.random() * attacks.max) + 1;
+        let randomPaper = Math.floor(Math.random() * ( attacks.max - randomRock ) ) + 1;
+        let randomScissors = Math.floor(Math.random() * ( attacks.max - randomRock - randomPaper )) + 1;
+
+        // Revisar y sumar al que tiene menos
+        if((randomRock + randomPaper + randomScissors) < attacks.max){
+            const diff = attacks.max - (randomRock + randomPaper + randomScissors);
+            const poorest = ( _ => {
+                const candidates = [{name: "rock", value: randomRock }, {name: "paper", value: randomPaper }, {name: "scissors", value: randomScissors }].sort((a,b) => a.value -b.value);
+                return candidates[0];
+            })();
+            switch( poorest.name ){
+                case "rock":
+                    randomRock += diff;
+                    break;
+                case "paper":
+                    randomPaper += diff;
+                    break;
+                case "scissors":
+                    randomScissors += diff;
+                    break;
+            }
+        }
+
         attacksUpdate(randomRock, randomPaper, randomScissors);
     }
 
