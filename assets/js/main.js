@@ -34,6 +34,14 @@
     const paperDisplayer = card.querySelector(".stats [data-stat=paper] .value");
     const scissorsDisplayer = card.querySelector(".stats [data-stat=scissors] .value");
 
+    // Ataques
+    const attacks = {
+        rock: 0,
+        paper: 0,
+        scissors: 0,
+        max: 100
+    };
+
     // Cambio de nombre
     const changeName = (name, save = true) => {
         nameDisplayer.dataset.text = name;
@@ -321,7 +329,7 @@
 
     // Ataques
     const attacksUpdate = (rock = 0, paper = 0, scissors = 0, save = true) => {
-        if((rock + paper + scissors) > 100) return;
+        if((rock + paper + scissors) > attacks.max) return;
         rockDisplayer.dataset.text = ("00" + rock).slice( `${rock}`.length > 2? -3 : -2 );
         paperDisplayer.dataset.text = ("00" + paper).slice( `${paper}`.length > 2? -3 : -2 );
         scissorsDisplayer.dataset.text = ("00" + scissors).slice( `${scissors}`.length > 2? -3 : -2 );
@@ -333,6 +341,11 @@
         })();
         Localization.GetTranslate("main", "team", [ Localization.GetTranslate("main",team.name) ], characterTeam, "data-text");
 
+        // Actualizar valores locales
+        attacks.rock = rock;
+        attacks.paper = paper;
+        attacks.scissors = scissors;
+
         if(save){
             setPlayerData("rock", rock);
             setPlayerData("paper", paper);
@@ -341,15 +354,40 @@
     }
 
     const attacksRandom = _ => {
-        const randomRock = Math.floor(Math.random() * 100) + 1;
-        const randomPaper = Math.floor(Math.random() * ( 100 - randomRock ) ) + 1;
-        const randomScissors = Math.floor(Math.random() * ( 100 - randomRock - randomPaper )) + 1;
+        const randomRock = Math.floor(Math.random() * attacks.max) + 1;
+        const randomPaper = Math.floor(Math.random() * ( attacks.max - randomRock ) ) + 1;
+        const randomScissors = Math.floor(Math.random() * ( attacks.max - randomRock - randomPaper )) + 1;
         attacksUpdate(randomRock, randomPaper, randomScissors);
     }
 
     const attacksInit = (rock = null, paper = null, scissors = null) => {
         if(rock != null && paper != null && scissors != null) attacksUpdate(rock, paper, scissors, false);
         else attacksRandom();
+    };
+
+    const attackSum = (attack) => {
+        const currentSum = attacks.rock + attacks.paper + attacks.scissors;
+        switch(attack){
+            case "rock":
+                if(attacks.scissors > 0){
+                    attacks.rock += 1;
+                    if( (attacks.rock + attacks.paper + attacks.scissors) > attacks.max) attacks.scissors -= 1;
+                }
+                break;
+            case "paper":
+                if(attacks.rock > 0){
+                    attacks.paper += 1;
+                    if( (attacks.rock + attacks.paper + attacks.scissors) > attacks.max) attacks.rock -= 1;
+                }
+                break;
+            case "scissors":
+                if(attacks.paper > 0){
+                    attacks.scissors += 1;
+                    if( (attacks.rock + attacks.paper + attacks.scissors) > attacks.max) attacks.paper -= 1;
+                }
+                break;
+        }
+        attacksUpdate(attacks.rock, attacks.paper, attacks.scissors);
     };
 
     // Compartir card
@@ -391,6 +429,9 @@
     document.querySelector("[data-action=share]").addEventListener("click", _ => {
         shareCard();
     })
+    rockDisplayer.addEventListener("click", _ => { attackSum("rock"); });
+    paperDisplayer.addEventListener("click", _ => { attackSum("paper"); });
+    scissorsDisplayer.addEventListener("click", _ => { attackSum("scissors"); });
 
     // Obtencion y guardado de datos
     const setPlayerData = (key, value) => {
