@@ -190,6 +190,10 @@ body{
     z-index: 2;
 }
 
+.card > .content > .header > .name > input::placeholder{
+    color: var(--white);
+}
+
 .card > .content > .header > .name > input:focus{
     outline: none;
 }

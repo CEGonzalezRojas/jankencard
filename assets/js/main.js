@@ -375,19 +375,18 @@
         {
             url: "/assets/images/characters/remi.png",
             style: {
-                width: "99%",
-                left: "23px",
-                top: "135px",
-                transform: "rotate(12deg)"
+                width: "107%",
+                left: "6px",
+                bottom: "-23px"
             },
             colors: {
-                card: '--card-purple-a',
-                footer: '--card-purple-b',
-                cardEffect: 0x57698e
+                card: '--card-blue-a',
+                footer: '--card-blue-b',
+                cardEffect: 0x393459
             },
-            mask: "/assets/images/others/mask/card-mask-purple.png",
+            mask: "/assets/images/others/mask/card-mask-blue.png",
             stats: {
-                bottom: "0"
+                top: "30%"
             }
         },
         {
@@ -406,6 +405,57 @@
             stats: {
                 top: "25%",
                 right: "20px",
+            }
+        },
+        {
+            url: "/assets/images/characters/tesuda.png",
+            style: {
+                width: "74%",
+                left: "140px",
+                top: "144px"
+            },
+            colors: {
+                card: '--card-red-a',
+                footer: '--card-red-b',
+                cardEffect: 0xba2626
+            },
+            mask: "/assets/images/others/mask/card-mask-red.png",
+            stats: {
+                top: "30%"
+            }
+        },
+        {
+            url: "/assets/images/characters/zoilah.png",
+            style: {
+                width: "82%",
+                left: "76px",
+                bottom: "-112px"
+            },
+            colors: {
+                card: '--card-red-a',
+                footer: '--card-red-b',
+                cardEffect: 0xba2626
+            },
+            mask: "/assets/images/others/mask/card-mask-red.png",
+            stats: {
+                bottom: "20px"
+            }
+        },
+        {
+            url: "/assets/images/characters/rafaelbudu.png",
+            style: {
+                width: "99%",
+                right: "-70px",
+                top: "140px"
+            },
+            colors: {
+                card: '--card-red-a',
+                footer: '--card-red-b',
+                cardEffect: 0xdba2626
+            },
+            mask: "/assets/images/others/mask/card-mask-red.png",
+            stats: {
+                top: "25%"
             }
         }
     ];
