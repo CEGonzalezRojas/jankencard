@@ -369,19 +369,19 @@
         const currentSum = attacks.rock + attacks.paper + attacks.scissors;
         switch(attack){
             case "rock":
-                if(attacks.scissors > 0){
+                if(attacks.scissors > 1){
                     attacks.rock += 1;
                     if( (attacks.rock + attacks.paper + attacks.scissors) > attacks.max) attacks.scissors -= 1;
                 }
                 break;
             case "paper":
-                if(attacks.rock > 0){
+                if(attacks.rock > 1){
                     attacks.paper += 1;
                     if( (attacks.rock + attacks.paper + attacks.scissors) > attacks.max) attacks.rock -= 1;
                 }
                 break;
             case "scissors":
-                if(attacks.paper > 0){
+                if(attacks.paper > 1){
                     attacks.scissors += 1;
                     if( (attacks.rock + attacks.paper + attacks.scissors) > attacks.max) attacks.paper -= 1;
                 }

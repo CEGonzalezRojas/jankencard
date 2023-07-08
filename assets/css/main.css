@@ -222,6 +222,11 @@ body{
     background-size: contain;
 }
 
+.card > .content > .body > .stats > [data-stat] > .text{
+    display: grid;
+    justify-self: right;
+}
+
 .card > .content > .body > .stats > [data-stat=rock] > .icon{
     width: 50px;
     height: 49px;
