@@ -203,6 +203,52 @@ body{
     user-select: none;
 }
 
+.card > .content > .body > .stats{
+    display: grid;
+    gap: 10px;
+    position: absolute;
+}
+
+.card > .content > .body > .stats > [data-stat]{
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.5em;
+}
+
+.card > .content > .body > .stats > [data-stat] > .icon{
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.card > .content > .body > .stats > [data-stat=rock] > .icon{
+    width: 50px;
+    height: 49px;
+}
+
+.card > .content > .body > .stats > [data-stat=rock] > .text{
+    margin-top: 15px;
+}
+
+.card > .content > .body > .stats > [data-stat=paper] > .icon{
+    width: 50px;
+    height: 55px;
+}
+
+.card > .content > .body > .stats > [data-stat=paper] > .text{
+    margin-top: 20px;
+}
+
+.card > .content > .body > .stats > [data-stat=scissors] > .icon{
+    width: 50px;
+    height: 56px;
+}
+
+.card > .content > .body > .stats > [data-stat=scissors] > .text{
+    margin-top: 18px;
+}
+
 .card > .footer{
     display: grid;
     grid-auto-flow: column;

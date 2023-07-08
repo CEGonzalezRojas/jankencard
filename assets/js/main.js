@@ -26,6 +26,7 @@
     const nameInput = card.querySelector(".name input");
     const nameDisplayer = card.querySelector(".name span");
     const characterDisplayer = card.querySelector(".character");
+    const characterStats = card.querySelector(".stats");
     const qlPointsDisplayer = card.querySelector(".ql-points");
     const rankingDisplayer = card.querySelector(".ranking");
 
@@ -57,7 +58,10 @@
                 card: '--card-yellow-a',
                 footer: '--card-yellow-b'
             },
-            mask: "/assets/images/others/mask/card-mask-yellow.png"
+            mask: "/assets/images/others/mask/card-mask-yellow.png",
+            stats: {
+                bottom: "15px"
+            }
         },
         {
             url: "/assets/images/characters/jade.png",
@@ -69,7 +73,11 @@
                 card: '--card-red-a',
                 footer: '--card-red-b'
             },
-            mask: "/assets/images/others/mask/card-mask-red.png"
+            mask: "/assets/images/others/mask/card-mask-red.png",
+            stats: {
+                right: "20px",
+                top: "45%"
+            }
         },
         {
             url: "/assets/images/characters/oriax.png",
@@ -83,7 +91,11 @@
                 card: '--card-blue-a',
                 footer: '--card-blue-b'
             },
-            mask: "/assets/images/others/mask/card-mask-blue.png"
+            mask: "/assets/images/others/mask/card-mask-blue.png",
+            stats: {
+                right: "20px",
+                top: "45%"
+            }
         },
         {
             url: "/assets/images/characters/sakura.png",
@@ -96,7 +108,11 @@
                 card: '--card-pink-a',
                 footer: '--card-pink-b'
             },
-            mask: "/assets/images/others/mask/card-mask-pink.png"
+            mask: "/assets/images/others/mask/card-mask-pink.png",
+            stats: {
+                right: "20px",
+                top: "40%"
+            }
         },
         {
             url: "/assets/images/characters/joaquin.png",
@@ -109,19 +125,28 @@
                 card: '--card-sky-a',
                 footer: '--card-sky-b'
             },
-            mask: "/assets/images/others/mask/card-mask-sky.png"
+            mask: "/assets/images/others/mask/card-mask-sky.png",
+            stats: {
+                right: "20px",
+                bottom: "50%",
+                top: "50%"
+            }
         },
         {
             url: "/assets/images/characters/airini.png",
             style: {
-                width: "100%",
+                width: "97%",
                 left: "-40px"
             },
             colors: {
                 card: '--card-gray-a',
                 footer: '--card-gray-b'
             },
-            mask: "/assets/images/others/mask/card-mask-gray.png"
+            mask: "/assets/images/others/mask/card-mask-gray.png",
+            stats: {
+                right: "20px",
+                top: "40%"
+            }
         },
         {
             url: "/assets/images/characters/barry.png",
@@ -133,7 +158,11 @@
                 card: '--card-red-a',
                 footer: '--card-red-b'
             },
-            mask: "/assets/images/others/mask/card-mask-red-b.png"
+            mask: "/assets/images/others/mask/card-mask-red-b.png",
+            stats: {
+                right: "20px",
+                top: "45%"
+            }
         },
         {
             url: "/assets/images/characters/misae.png",
@@ -146,7 +175,11 @@
                 card: '--card-pink-a',
                 footer: '--card-pink-b'
             },
-            mask: "/assets/images/others/mask/card-mask-pink-b.png"
+            mask: "/assets/images/others/mask/card-mask-pink-b.png",
+            stats: {
+                right: "20px",
+                top: "30%"
+            }
         },
         {
             url: "/assets/images/characters/matsuo.png",
@@ -158,32 +191,42 @@
                 card: '--card-green-a',
                 footer: '--card-green-b'
             },
-            mask: "/assets/images/others/mask/card-mask-green.png"
+            mask: "/assets/images/others/mask/card-mask-green.png",
+            stats: {
+                top: "45%"
+            }
         },
         {
             url: "/assets/images/characters/juanita.png",
             style:{
-                width: "61%",
-                left: "-30px"
+                width: "61%"
             },
             colors: {
                 card: '--card-purple-a',
                 footer: '--card-purple-b'
             },
-            mask: "/assets/images/others/mask/card-mask-purple.png"
+            mask: "/assets/images/others/mask/card-mask-purple.png",
+            stats: {
+                right: "20px",
+                top: "45%"
+            }
         },
         {
             url: "/assets/images/characters/duo.png",
             style:{
-                width: "90%",
+                width: "86%",
                 left: "-40px",
-                bottom: "0px"
+                bottom: "10px"
             },
             colors: {
                 card: '--card-blue-a',
                 footer: '--card-blue-b'
             },
-            mask: "/assets/images/others/mask/card-mask-blue-b.png"
+            mask: "/assets/images/others/mask/card-mask-blue-b.png",
+            stats: {
+                right: "20px",
+                top: "30%"
+            }
         },
         {
             url: "/assets/images/characters/arataka.png",
@@ -196,7 +239,11 @@
                 card: '--card-gray-a',
                 footer: '--card-gray-b'
             },
-            mask: "/assets/images/others/mask/card-mask-gray-b.png"
+            mask: "/assets/images/others/mask/card-mask-gray-b.png",
+            stats: {
+                right: "20px",
+                top: "40%"
+            }
         }
     ];
 
@@ -230,6 +277,13 @@
             style = `${style} ${prop}: ${selectedCharacter.style[prop]};`;
         }
         characterDisplayer.style = style;
+
+        // Estilos stats
+        let statsStyle = "";
+        for(let prop in selectedCharacter.stats){
+            statsStyle = `${statsStyle} ${prop}: ${selectedCharacter.stats[prop]};`;
+        }
+        characterStats.style = statsStyle;
 
         // Estilo card
         cardBackground.style.backgroundColor = `var(${selectedCharacter.colors.card})`;
