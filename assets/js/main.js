@@ -19,6 +19,7 @@
     })();
 
     // Elementos comunes
+    const container = document.querySelector(".container");
     const card = document.querySelector(".card");
     const cardBackground = card.querySelector(".background");
     const cardBackgroundMask = cardBackground.querySelector(".mask");
@@ -36,6 +37,31 @@
     const rockTarget = card.querySelector(".stats [data-stat=rock]");
     const paperTarget = card.querySelector(".stats [data-stat=paper]");
     const scissorsTarget = card.querySelector(".stats [data-stat=scissors]");
+
+    // Vantas
+    const wavesContainer = VANTA.WAVES({
+        el: container,
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 960,
+        minWidth: 540,
+        scale: 1.00,
+        scaleMobile: 1.00,
+        color: 0x6c5855
+    });
+
+    const wavesBackground = VANTA.WAVES({
+        el: cardBackground,
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200,
+        minWidth: 200,
+        scale: 1.00,
+        scaleMobile: 1.00,
+        color: 0xce8d2d
+    });
 
     // Ataques
     const attacks = {
@@ -71,7 +97,8 @@
             },
             colors: {
                 card: '--card-yellow-a',
-                footer: '--card-yellow-b'
+                footer: '--card-yellow-b',
+                cardEffect: 0xce8d2d
             },
             mask: "/assets/images/others/mask/card-mask-yellow.png",
             stats: {
@@ -82,11 +109,12 @@
             url: "/assets/images/characters/jade.png",
             style: {
                 width: "91%",
-                left: "-30px"
+                left: "-30px",
             },
             colors: {
                 card: '--card-red-a',
-                footer: '--card-red-b'
+                footer: '--card-red-b',
+                cardEffect: 0xba2626
             },
             mask: "/assets/images/others/mask/card-mask-red.png",
             stats: {
@@ -104,7 +132,8 @@
             },
             colors: {
                 card: '--card-blue-a',
-                footer: '--card-blue-b'
+                footer: '--card-blue-b',
+                cardEffect: 0x393459,
             },
             mask: "/assets/images/others/mask/card-mask-blue.png",
             stats: {
@@ -121,7 +150,8 @@
             },
             colors: {
                 card: '--card-pink-a',
-                footer: '--card-pink-b'
+                footer: '--card-pink-b',
+                cardEffect: 0xd34c41
             },
             mask: "/assets/images/others/mask/card-mask-pink.png",
             stats: {
@@ -138,7 +168,8 @@
             },
             colors: {
                 card: '--card-sky-a',
-                footer: '--card-sky-b'
+                footer: '--card-sky-b',
+                cardEffect: 0x709aa3
             },
             mask: "/assets/images/others/mask/card-mask-sky.png",
             stats: {
@@ -155,8 +186,9 @@
                 bottom: "0px"
             },
             colors: {
-                card: '--card-gray-a',
-                footer: '--card-gray-b'
+                card: '--card-green-a',
+                footer: '--card-green-b',
+                cardEffect: 0x5f856f
             },
             mask: "/assets/images/others/mask/card-mask-gray.png",
             stats: {
@@ -173,7 +205,8 @@
             },
             colors: {
                 card: '--card-red-a',
-                footer: '--card-red-b'
+                footer: '--card-red-b',
+                cardEffect: 0xba2626
             },
             mask: "/assets/images/others/mask/card-mask-red-b.png",
             stats: {
@@ -190,7 +223,8 @@
             },
             colors: {
                 card: '--card-pink-a',
-                footer: '--card-pink-b'
+                footer: '--card-pink-b',
+                cardEffect: 0xd34c41
             },
             mask: "/assets/images/others/mask/card-mask-pink-b.png",
             stats: {
@@ -207,7 +241,8 @@
             },
             colors: {
                 card: '--card-green-a',
-                footer: '--card-green-b'
+                footer: '--card-green-b',
+                cardEffect: 0x5f856f
             },
             mask: "/assets/images/others/mask/card-mask-green.png",
             stats: {
@@ -222,7 +257,8 @@
             },
             colors: {
                 card: '--card-purple-a',
-                footer: '--card-purple-b'
+                footer: '--card-purple-b',
+                cardEffect: 0x57698e
             },
             mask: "/assets/images/others/mask/card-mask-purple.png",
             stats: {
@@ -239,7 +275,8 @@
             },
             colors: {
                 card: '--card-blue-a',
-                footer: '--card-blue-b'
+                footer: '--card-blue-b',
+                cardEffect: 0x393459
             },
             mask: "/assets/images/others/mask/card-mask-blue-b.png",
             stats: {
@@ -255,8 +292,9 @@
                 left: "-30px"
             },
             colors: {
-                card: '--card-gray-a',
-                footer: '--card-gray-b'
+                card: '--card-green-a',
+                footer: '--card-green-b',
+                cardEffect: 0x5f856f
             },
             mask: "/assets/images/others/mask/card-mask-gray-b.png",
             stats: {
@@ -307,6 +345,10 @@
         // Estilo card
         cardBackground.style.backgroundColor = `var(${selectedCharacter.colors.card})`;
         cardFooter.style.backgroundColor = `var(${selectedCharacter.colors.footer})`;
+
+        // Efecto
+        wavesContainer.setOptions({ color: selectedCharacter.colors.backgroundEffect });
+        wavesBackground.setOptions({ color: selectedCharacter.colors.cardEffect });
     });
 
     // Datos de ranking y QLpoints
@@ -416,8 +458,7 @@
 
     // Compartir card
     const shareCard = async _ => {
-        var card = document.querySelector(".container");
-        html2canvas(card, {windowWidth: 540, windowHeight: 960, backgroundColor: "#4cbcf8", allowTaint: true, useCORS: true, ignoreElements: element => {
+        html2canvas(container, {width: 540, windowWidth: 540, height: 960, windowHeight: 960, backgroundColor: "#4cbcf8", allowTaint: true, useCORS: true, ignoreElements: element => {
             if(element.classList.contains("changers")) return true;
         }}).then(async (canvas) => {
             // TODO: Descargar imagen si no puede compartir
