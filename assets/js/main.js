@@ -303,9 +303,26 @@
             }
         },
         {
+            url: "/assets/images/characters/matriara.png",
+            style: {
+                width: "120%",
+                left: "-50px",
+                bottom: "9px"
+            },
+            colors: {
+                card: '--card-red-a',
+                footer: '--card-red-b',
+                cardEffect: 0xba2626
+            },
+            mask: "/assets/images/others/mask/card-mask-red.png",
+            stats: {
+                bottom: "5%"
+            }
+        },
+        {
             url: "/assets/images/characters/salfate.png",
             style: {
-                width: "113%",
+                width: "118%",
                 right: "-40px",
                 bottom: "0"
             },
@@ -314,9 +331,81 @@
                 footer: '--card-blue-b',
                 cardEffect: 0x57698e
             },
-            mask: "/assets/images/others/mask/card-mask-gray-b.png",
+            mask: "/assets/images/others/mask/card-mask-blue.png",
             stats: {
                 top: "30%"
+            }
+        },
+        {
+            url: "/assets/images/characters/miaufin.png",
+            style: {
+                width: "73%",
+                left: "-25px",
+                bottom: "-4px"
+            },
+            colors: {
+                card: '--card-sky-a',
+                footer: '--card-sky-b',
+                cardEffect: 0x709aa3
+            },
+            mask: "/assets/images/others/mask/card-mask-sky.png",
+            stats: {
+                top: "30%",
+                right: "20px"
+            }
+        },
+        {
+            url: "/assets/images/characters/aru.png",
+            style: {
+                width: "99%",
+                left: "23px",
+                top: "135px",
+                transform: "rotate(12deg)"
+            },
+            colors: {
+                card: '--card-purple-a',
+                footer: '--card-purple-b',
+                cardEffect: 0x57698e
+            },
+            mask: "/assets/images/others/mask/card-mask-purple.png",
+            stats: {
+                bottom: "0"
+            }
+        },
+        {
+            url: "/assets/images/characters/remi.png",
+            style: {
+                width: "99%",
+                left: "23px",
+                top: "135px",
+                transform: "rotate(12deg)"
+            },
+            colors: {
+                card: '--card-purple-a',
+                footer: '--card-purple-b',
+                cardEffect: 0x57698e
+            },
+            mask: "/assets/images/others/mask/card-mask-purple.png",
+            stats: {
+                bottom: "0"
+            }
+        },
+        {
+            url: "/assets/images/characters/haramiyo.png",
+            style: {
+                width: "88%",
+                left: "-42px",
+                top: "155px"
+            },
+            colors: {
+                card: '--card-pink-a',
+                footer: '--card-pink-b',
+                cardEffect: 0xd34c41
+            },
+            mask: "/assets/images/others/mask/card-mask-pink.png",
+            stats: {
+                top: "25%",
+                right: "20px",
             }
         }
     ];
