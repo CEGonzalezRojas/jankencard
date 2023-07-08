@@ -27,8 +27,12 @@
     const nameDisplayer = card.querySelector(".name span");
     const characterDisplayer = card.querySelector(".character");
     const characterStats = card.querySelector(".stats");
+    const characterTeam = card.querySelector(".team");
     const qlPointsDisplayer = card.querySelector(".ql-points");
     const rankingDisplayer = card.querySelector(".ranking");
+    const rockDisplayer = card.querySelector(".stats [data-stat=rock] .value");
+    const paperDisplayer = card.querySelector(".stats [data-stat=paper] .value");
+    const scissorsDisplayer = card.querySelector(".stats [data-stat=scissors] .value");
 
     // Cambio de nombre
     const changeName = (name, save = true) => {
@@ -135,7 +139,7 @@
         {
             url: "/assets/images/characters/airini.png",
             style: {
-                width: "97%",
+                width: "96%",
                 left: "-40px",
                 bottom: "0px"
             },
@@ -218,7 +222,7 @@
         {
             url: "/assets/images/characters/duo.png",
             style:{
-                width: "86%",
+                width: "84%",
                 left: "-40px",
                 bottom: "10px"
             },
@@ -315,6 +319,39 @@
         else staticticsRandom();
     };
 
+    // Ataques
+    const attacksUpdate = (rock = 0, paper = 0, scissors = 0, save = true) => {
+        if((rock + paper + scissors) > 100) return;
+        rockDisplayer.dataset.text = ("00" + rock).slice( `${rock}`.length > 2? -3 : -2 );
+        paperDisplayer.dataset.text = ("00" + paper).slice( `${paper}`.length > 2? -3 : -2 );
+        scissorsDisplayer.dataset.text = ("00" + scissors).slice( `${scissors}`.length > 2? -3 : -2 );
+
+        // Determinar equipo
+        const team = ( _ => {
+            const candidates = [{name: "rock", value: rock }, {name: "paper", value: paper }, {name: "scissors", value: scissors }].sort((a,b) => b.value - a.value);
+            return candidates[0];
+        })();
+        Localization.GetTranslate("main", "team", [ Localization.GetTranslate("main",team.name) ], characterTeam, "data-text");
+
+        if(save){
+            setPlayerData("rock", rock);
+            setPlayerData("paper", paper);
+            setPlayerData("scissors", scissors);
+        }
+    }
+
+    const attacksRandom = _ => {
+        const randomRock = Math.floor(Math.random() * 100) + 1;
+        const randomPaper = Math.floor(Math.random() * ( 100 - randomRock ) ) + 1;
+        const randomScissors = Math.floor(Math.random() * ( 100 - randomRock - randomPaper )) + 1;
+        attacksUpdate(randomRock, randomPaper, randomScissors);
+    }
+
+    const attacksInit = (rock = null, paper = null, scissors = null) => {
+        if(rock != null && paper != null && scissors != null) attacksUpdate(rock, paper, scissors, false);
+        else attacksRandom();
+    };
+
     // Compartir card
     const shareCard = async _ => {
         var card = document.querySelector(".container");
@@ -348,7 +385,7 @@
     }
 
     /** Botones */
-    document.querySelector("[data-action=change]").addEventListener("click", _ => { characterIndexUpdate(); });
+    document.querySelector("[data-action=change]").addEventListener("click", _ => { characterIndexUpdate(); attacksRandom(); });
     document.querySelector("[data-action=share]").addEventListener("click", _ => {
         shareCard();
     })
@@ -371,4 +408,5 @@
     changeName(originalPlayerData.name || "", false);
     characterIndexSet(originalPlayerData.character, false);
     staticticsInit(originalPlayerData.qlPoints, originalPlayerData.ranking);
+    attacksInit(originalPlayerData.rock, originalPlayerData.paper, originalPlayerData.scissors);
 })();

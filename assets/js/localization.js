@@ -12,33 +12,31 @@ class Localization{
             en: {
                 name: "Name",
                 share: "Share",
-                change: "Change"
+                change: "Change",
+                team: "Team {0}",
+                rock: "Rock",
+                paper: "Paper",
+                scissors: "Scissors"
             },
 
             es: {
                 name: "Nombre",
                 share: "Compartir",
-                change: "Cambiar"
+                change: "Cambiar",
+                team: "Equipo {0}",
+                rock: "Piedra",
+                paper: "Papel",
+                scissors: "Tijeras"
             },
 
             ja: {
-                
-            },
-
-            fr: {
-                
-            },
-
-            it: {
-                
-            },
-
-            ru: {
-                
-            },
-
-            pt: {
-                
+                name: "名前",
+                share: "共有",
+                change: "ランダム",
+                team: "{0}団",
+                rock: "グー",
+                paper: "パー",
+                scissors: "チョキ"
             }
 
         }
@@ -55,22 +53,13 @@ class Localization{
         if( Localization.validLanguage.indexOf(language) == -1 ) language = Localization.validLanguage[0]; 
         
         let string = "";
-        values = values? values.split(",") : [];
+        values = values? (Array.isArray(values)? values : values.split(",")) : [];
         const withArguments = values.length > 0;
 
         switch(page){
 
             case "main":
                 string = Localization.Main()[language][ key ];
-                break;
-            case "contact":
-                string = Localization.Contact()[language][ key ];
-                break;
-            case "deeplinkRoom":
-                string = Localization.DeeplinkRoom()[language][ key ];
-                break;
-            case "media":
-                string = Localization.Media()[language][ key ];
                 break;
         }
 
