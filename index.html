@@ -66,9 +66,20 @@
         <div class="button" data-action="share" data-localization-page="main" data-localization-key="share"></div>
     </div>
 
+    <script>
+        HTMLCanvasElement.prototype.getContext = function(origFn) {
+          return function(type, attribs) {
+            attribs = attribs || {};
+            attribs.preserveDrawingBuffer = true;
+            return origFn.call(this, type, attribs);
+          };
+        }(HTMLCanvasElement.prototype.getContext);
+    </script>
     <script src="/assets/js/localization.js"></script>
     <script src="/assets/js/lazyLoad.js"></script>
     <script src="/assets/js/html2canvas.js"></script>
+    <script src="/assets/js/three.min.js"></script>
+    <script src="/assets/js/vanta.waves.min.js"></script>
     <script src="/assets/js/main.js"></script>
 </body>
 </html>

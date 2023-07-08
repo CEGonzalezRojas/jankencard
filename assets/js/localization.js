@@ -47,7 +47,7 @@ class Localization{
     static GetTranslate( page, key, values, element, attributeTarget ){
         
         let language = navigator.language.toLowerCase();
-
+        
         // Permitiremos ciertos lenguajes con su codigo completo
         if( Localization.allowedCompoundLanguage.indexOf(language) == -1 ) language = language.split("-")[0];
         if( Localization.validLanguage.indexOf(language) == -1 ) language = Localization.validLanguage[0]; 
