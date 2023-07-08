@@ -136,7 +136,8 @@
             url: "/assets/images/characters/airini.png",
             style: {
                 width: "97%",
-                left: "-40px"
+                left: "-40px",
+                bottom: "0px"
             },
             colors: {
                 card: '--card-gray-a',
@@ -152,7 +153,8 @@
             url: "/assets/images/characters/barry.png",
             style: {
                 width: "72%",
-                left: "-20px"
+                left: "-20px",
+                bottom: "-120px"
             },
             colors: {
                 card: '--card-red-a',
@@ -185,7 +187,8 @@
             url: "/assets/images/characters/matsuo.png",
             style: {
                 width: "88%",
-                right: "-30px"
+                right: "-30px",
+                bottom: "-10px"
             },
             colors: {
                 card: '--card-green-a',
@@ -199,7 +202,8 @@
         {
             url: "/assets/images/characters/juanita.png",
             style:{
-                width: "61%"
+                width: "61%",
+                bottom: "-15px"
             },
             colors: {
                 card: '--card-purple-a',
