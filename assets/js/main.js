@@ -33,6 +33,9 @@
     const rockDisplayer = card.querySelector(".stats [data-stat=rock] .value");
     const paperDisplayer = card.querySelector(".stats [data-stat=paper] .value");
     const scissorsDisplayer = card.querySelector(".stats [data-stat=scissors] .value");
+    const rockTarget = card.querySelector(".stats [data-stat=rock]");
+    const paperTarget = card.querySelector(".stats [data-stat=paper]");
+    const scissorsTarget = card.querySelector(".stats [data-stat=scissors]");
 
     // Ataques
     const attacks = {
@@ -394,7 +397,7 @@
     const shareCard = async _ => {
         var card = document.querySelector(".container");
         html2canvas(card, {windowWidth: 540, windowHeight: 960, backgroundColor: "#4cbcf8", allowTaint: true, useCORS: true, ignoreElements: element => {
-            if(element.classList.contains("button")) return true;
+            if(element.classList.contains("changers")) return true;
         }}).then(async (canvas) => {
             // TODO: Descargar imagen si no puede compartir
             //var link = document.createElement("a");
@@ -429,9 +432,9 @@
     document.querySelector("[data-action=share]").addEventListener("click", _ => {
         shareCard();
     })
-    rockDisplayer.addEventListener("click", _ => { attackSum("rock"); });
-    paperDisplayer.addEventListener("click", _ => { attackSum("paper"); });
-    scissorsDisplayer.addEventListener("click", _ => { attackSum("scissors"); });
+    rockTarget.addEventListener("click", _ => { attackSum("rock"); });
+    paperTarget.addEventListener("click", _ => { attackSum("paper"); });
+    scissorsTarget.addEventListener("click", _ => { attackSum("scissors"); });
 
     // Obtencion y guardado de datos
     const setPlayerData = (key, value) => {
