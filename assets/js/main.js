@@ -33,6 +33,17 @@
     const rockDisplayer = card.querySelector(".stats [data-stat=rock] .value");
     const paperDisplayer = card.querySelector(".stats [data-stat=paper] .value");
     const scissorsDisplayer = card.querySelector(".stats [data-stat=scissors] .value");
+    const rockTarget = card.querySelector(".stats [data-stat=rock]");
+    const paperTarget = card.querySelector(".stats [data-stat=paper]");
+    const scissorsTarget = card.querySelector(".stats [data-stat=scissors]");
+
+    // Ataques
+    const attacks = {
+        rock: 0,
+        paper: 0,
+        scissors: 0,
+        max: 100
+    };
 
     // Cambio de nombre
     const changeName = (name, save = true) => {
@@ -321,7 +332,7 @@
 
     // Ataques
     const attacksUpdate = (rock = 0, paper = 0, scissors = 0, save = true) => {
-        if((rock + paper + scissors) > 100) return;
+        if((rock + paper + scissors) > attacks.max) return;
         rockDisplayer.dataset.text = ("00" + rock).slice( `${rock}`.length > 2? -3 : -2 );
         paperDisplayer.dataset.text = ("00" + paper).slice( `${paper}`.length > 2? -3 : -2 );
         scissorsDisplayer.dataset.text = ("00" + scissors).slice( `${scissors}`.length > 2? -3 : -2 );
@@ -333,6 +344,11 @@
         })();
         Localization.GetTranslate("main", "team", [ Localization.GetTranslate("main",team.name) ], characterTeam, "data-text");
 
+        // Actualizar valores locales
+        attacks.rock = rock;
+        attacks.paper = paper;
+        attacks.scissors = scissors;
+
         if(save){
             setPlayerData("rock", rock);
             setPlayerData("paper", paper);
@@ -341,9 +357,30 @@
     }
 
     const attacksRandom = _ => {
-        const randomRock = Math.floor(Math.random() * 100) + 1;
-        const randomPaper = Math.floor(Math.random() * ( 100 - randomRock ) ) + 1;
-        const randomScissors = Math.floor(Math.random() * ( 100 - randomRock - randomPaper )) + 1;
+        let randomRock = Math.floor(Math.random() * attacks.max) + 1;
+        let randomPaper = Math.floor(Math.random() * ( attacks.max - randomRock ) ) + 1;
+        let randomScissors = Math.floor(Math.random() * ( attacks.max - randomRock - randomPaper )) + 1;
+
+        // Revisar y sumar al que tiene menos
+        if((randomRock + randomPaper + randomScissors) < attacks.max){
+            const diff = attacks.max - (randomRock + randomPaper + randomScissors);
+            const poorest = ( _ => {
+                const candidates = [{name: "rock", value: randomRock }, {name: "paper", value: randomPaper }, {name: "scissors", value: randomScissors }].sort((a,b) => a.value -b.value);
+                return candidates[0];
+            })();
+            switch( poorest.name ){
+                case "rock":
+                    randomRock += diff;
+                    break;
+                case "paper":
+                    randomPaper += diff;
+                    break;
+                case "scissors":
+                    randomScissors += diff;
+                    break;
+            }
+        }
+
         attacksUpdate(randomRock, randomPaper, randomScissors);
     }
 
@@ -352,11 +389,36 @@
         else attacksRandom();
     };
 
+    const attackSum = (attack) => {
+        const currentSum = attacks.rock + attacks.paper + attacks.scissors;
+        switch(attack){
+            case "rock":
+                if(attacks.scissors > 1){
+                    attacks.rock += 1;
+                    if( (attacks.rock + attacks.paper + attacks.scissors) > attacks.max) attacks.scissors -= 1;
+                }
+                break;
+            case "paper":
+                if(attacks.rock > 1){
+                    attacks.paper += 1;
+                    if( (attacks.rock + attacks.paper + attacks.scissors) > attacks.max) attacks.rock -= 1;
+                }
+                break;
+            case "scissors":
+                if(attacks.paper > 1){
+                    attacks.scissors += 1;
+                    if( (attacks.rock + attacks.paper + attacks.scissors) > attacks.max) attacks.paper -= 1;
+                }
+                break;
+        }
+        attacksUpdate(attacks.rock, attacks.paper, attacks.scissors);
+    };
+
     // Compartir card
     const shareCard = async _ => {
         var card = document.querySelector(".container");
         html2canvas(card, {windowWidth: 540, windowHeight: 960, backgroundColor: "#4cbcf8", allowTaint: true, useCORS: true, ignoreElements: element => {
-            if(element.classList.contains("button")) return true;
+            if(element.classList.contains("changers")) return true;
         }}).then(async (canvas) => {
             // TODO: Descargar imagen si no puede compartir
             //var link = document.createElement("a");
@@ -391,6 +453,9 @@
     document.querySelector("[data-action=share]").addEventListener("click", _ => {
         shareCard();
     })
+    rockTarget.addEventListener("click", _ => { attackSum("rock"); });
+    paperTarget.addEventListener("click", _ => { attackSum("paper"); });
+    scissorsTarget.addEventListener("click", _ => { attackSum("scissors"); });
 
     // Obtencion y guardado de datos
     const setPlayerData = (key, value) => {

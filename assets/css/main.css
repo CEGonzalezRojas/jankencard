@@ -210,16 +210,42 @@ body{
 }
 
 .card > .content > .body > .stats > [data-stat]{
+    position: relative;
     display: grid;
     grid-auto-flow: column;
     align-items: center;
     gap: 10px;
     font-size: 2em;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color:transparent;
 }
 
 .card > .content > .body > .stats > [data-stat] > .icon{
+    position: relative;
     background-repeat: no-repeat;
     background-size: contain;
+}
+
+.card > .content > .body > .stats > [data-stat] > .text{
+    display: grid;
+    justify-self: right;
+}
+
+.card > .content > .body > .stats > [data-stat] > .changers{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: -38px;
+    z-index: 2;
+}
+
+.card > .content > .body > .stats > [data-stat] > .changers > *{
+    width: 28px;
+    height: 28px;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .card > .content > .body > .stats > [data-stat=rock] > .icon{
@@ -228,6 +254,10 @@ body{
 }
 
 .card > .content > .body > .stats > [data-stat=rock] > .text{
+    margin-top: 15px;
+}
+
+.card > .content > .body > .stats > [data-stat=rock] > .changers{
     margin-top: 15px;
 }
 
@@ -240,12 +270,20 @@ body{
     margin-top: 20px;
 }
 
+.card > .content > .body > .stats > [data-stat=paper] > .changers{
+    margin-top: 20px;
+}
+
 .card > .content > .body > .stats > [data-stat=scissors] > .icon{
     width: 50px;
     height: 56px;
 }
 
 .card > .content > .body > .stats > [data-stat=scissors] > .text{
+    margin-top: 18px;
+}
+
+.card > .content > .body > .stats > [data-stat=scissors] > .changers{
     margin-top: 18px;
 }
 
