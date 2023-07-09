@@ -658,15 +658,22 @@
     document.querySelector("[data-action=share]").addEventListener("click", _ => {
         shareCard();
     })
-    rockTarget.addEventListener("mousedown", _ => { attackSum("rock"); });
-    rockTarget.addEventListener("mouseup", _ => { attackSumIntervalStop(); });
-    rockTarget.addEventListener("mouseleave", _ => { attackSumIntervalStop(); });
-    paperTarget.addEventListener("mousedown", _ => { attackSum("paper"); });
-    paperTarget.addEventListener("mouseup", _ => { attackSumIntervalStop(); });
-    paperTarget.addEventListener("mouseleave", _ => { attackSumIntervalStop(); });
-    scissorsTarget.addEventListener("mousedown", _ => { attackSum("scissors"); });
-    scissorsTarget.addEventListener("mouseup", _ => { attackSumIntervalStop(); });
-    scissorsTarget.addEventListener("mouseleave", _ => { attackSumIntervalStop(); });
+
+    // Determinar eventos
+    const touchAvailable = 'ontouchstart' in document.documentElement;
+    const eventStart = touchAvailable? "touchstart" : "mousedown";
+    const eventEnd = touchAvailable? "touchend" : "mouseup";
+    const eventMove = touchAvailable? "touchmove" : "mouseleave";
+
+    rockTarget.addEventListener(eventStart, _ => { attackSum("rock"); });
+    rockTarget.addEventListener(eventEnd, _ => { attackSumIntervalStop(); });
+    rockTarget.addEventListener(eventMove, _ => { attackSumIntervalStop(); });
+    paperTarget.addEventListener(eventStart, _ => { attackSum("paper"); });
+    paperTarget.addEventListener(eventEnd, _ => { attackSumIntervalStop(); });
+    paperTarget.addEventListener(eventMove, _ => { attackSumIntervalStop(); });
+    scissorsTarget.addEventListener(eventStart, _ => { attackSum("scissors"); });
+    scissorsTarget.addEventListener(eventEnd, _ => { attackSumIntervalStop(); });
+    scissorsTarget.addEventListener(eventMove, _ => { attackSumIntervalStop(); });
 
     // Obtencion y guardado de datos
     const setPlayerData = (key, value) => {
