@@ -483,7 +483,7 @@
         const selectedCharacter = characters[characterIndex];
         if(save) {
             setPlayerData("character", characterIndex);
-            sentEvent(GEvents.characterSelect, selectedCharacter.name);
+            sentEvent(GEvents.characterSelect, { "name": selectedCharacter.name });
         }
         characterUpdate();
     }
@@ -722,13 +722,13 @@
             };
             navigator.clipboard.writeText("https://card.jankenup.com/");
             navigator.share(shareData);
-            sentEvent(GEvents.card_share);
+            sentEvent(GEvents.card_share, {"language": Localization.GetSelectedLanguage()});
         });
     }
 
-    const sentEvent = (name, value ,data = null) => {
-        if(!name || !value) return;
-        if(typeof gtag != 'undefined') gtag(name, value, data);
+    const sentEvent = (name, data = null) => {
+        if(!name) return;
+        if(typeof gtag != 'undefined') gtag("event", name, data);
     };
 
     /** Botones */

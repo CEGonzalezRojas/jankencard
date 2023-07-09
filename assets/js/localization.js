@@ -70,12 +70,7 @@ class Localization{
     // Solicitar un texto para incluir
     static GetTranslate( page, key, values, element, attributeTarget ){
         
-        let language = navigator.language.toLowerCase();
-
-        // Permitiremos ciertos lenguajes con su codigo completo
-        if( Localization.allowedCompoundLanguage.indexOf(language) == -1 ) language = language.split("-")[0];
-        if( Localization.validLanguage.indexOf(language) == -1 ) language = Localization.validLanguage[0]; 
-        
+        let language = Localization.GetSelectedLanguage();
         let string = "";
         values = values? (Array.isArray(values)? values : values.split(",")) : [];
         const withArguments = values.length > 0;
@@ -104,6 +99,17 @@ class Localization{
         }
 
         return string? string : ''; 
+    }
+
+    // Idioma seleccionado
+    static GetSelectedLanguage(){
+        let language = navigator.language.toLowerCase();
+
+        // Permitiremos ciertos lenguajes con su codigo completo
+        if( Localization.allowedCompoundLanguage.indexOf(language) == -1 ) language = language.split("-")[0];
+        if( Localization.validLanguage.indexOf(language) == -1 ) language = Localization.validLanguage[0]; 
+
+        return language;
     }
 
 }
