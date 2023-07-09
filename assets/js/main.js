@@ -728,7 +728,7 @@
 
     const sentEvent = (name, value ,data = null) => {
         if(!name || !value) return;
-        if(typeof gtag == 'undefined') gtag(name, value, data);
+        if(typeof gtag != 'undefined') gtag(name, value, data);
     };
 
     /** Botones */
