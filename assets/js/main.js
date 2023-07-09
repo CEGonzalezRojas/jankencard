@@ -668,36 +668,39 @@
         html2canvas(container, {width: 540, windowWidth: 540, height: 960, windowHeight: 960, backgroundColor: "#4cbcf8", allowTaint: true, useCORS: true, ignoreElements: element => {
             if(element.classList.contains("changers")) return true;
         }}).then(async (canvas) => {
-            // TODO: Descargar imagen si no puede compartir
-            //var link = document.createElement("a");
-            //document.body.appendChild(link);
-            //shareFile(dataURLtoFile(canvas.toDataURL()), "JanKenUP! Card");
-            //link.download = "html_image.jpg";
-            //link.href = canvas.toDataURL();
-            //link.target = '_blank';
-            //link.click();
 
             const dataUrl = canvas.toDataURL();
             const blob = await (await fetch(dataUrl)).blob();
             const filesArray = [
                 new File(
                 [blob],
-                'animation.png',
+                `${getPlayerData("name","noname")}-jankencard.png`,
                 {
                     type: blob.type,
                     lastModified: new Date().getTime()
                 }
                 )
             ];
-            const text = Localization.GetTranslate("main","shareText");
-            const shareData = {
-                title: "JanKenCard!",
-                text: text,
-                url: "https://card.jankenup.com/",
-                files: filesArray
-            };
-            navigator.clipboard.writeText(text);
-            navigator.share(shareData);
+
+            if(navigator.canShare()){
+                const text = Localization.GetTranslate("main","shareText");
+                const shareData = {
+                    title: "JanKenCard!",
+                    text: text,
+                    url: "https://card.jankenup.com/",
+                    files: filesArray
+                };
+                navigator.clipboard.writeText(text);
+                navigator.share(shareData);
+            }
+            else{
+                var link = document.createElement("a");
+                document.body.appendChild(link);
+                link.download = `${getPlayerData("name","noname")}-jankencard.png`;
+                link.href = canvas.toDataURL();
+                link.target = '_blank';
+                link.click();
+            }
         });
     }
 
@@ -764,9 +767,8 @@
 
     // PWA
     if ("serviceWorker" in navigator) {
-        window.addEventListener("load", function() {
-          navigator.serviceWorker
-            .register("/sw.js")
-        })
+        window.addEventListener("load", async () => {
+            const registration = await navigator.serviceWorker.register("/sw.js");
+        });
     };
 })();
