@@ -682,25 +682,15 @@
                 )
             ];
 
-            if(navigator.canShare()){
-                const text = Localization.GetTranslate("main","shareText");
-                const shareData = {
-                    title: "JanKenCard!",
-                    text: text,
-                    url: "https://card.jankenup.com/",
-                    files: filesArray
-                };
-                navigator.clipboard.writeText(text);
-                navigator.share(shareData);
-            }
-            else{
-                var link = document.createElement("a");
-                document.body.appendChild(link);
-                link.download = `${getPlayerData("name","noname")}-jankencard.png`;
-                link.href = canvas.toDataURL();
-                link.target = '_blank';
-                link.click();
-            }
+            const text = Localization.GetTranslate("main","shareText");
+            const shareData = {
+                title: "JanKenCard!",
+                text: text,
+                url: "https://card.jankenup.com/",
+                files: filesArray
+            };
+            navigator.clipboard.writeText(text);
+            navigator.share(shareData);
         });
     }
 
