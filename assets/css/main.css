@@ -191,7 +191,7 @@ body{
 }
 
 .card > .content > .header > .name > input::placeholder{
-    color: var(--white);
+    color: var(--blue);
 }
 
 .card > .content > .header > .name > input:focus{

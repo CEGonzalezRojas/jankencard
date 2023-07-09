@@ -39,18 +39,7 @@
     const scissorsTarget = card.querySelector(".stats [data-stat=scissors]");
 
     // Vantas
-    const wavesContainer = VANTA.WAVES({
-        el: container,
-        mouseControls: true,
-        touchControls: true,
-        gyroControls: false,
-        minHeight: 960,
-        minWidth: 540,
-        scale: 1.00,
-        scaleMobile: 1.00,
-        color: 0x255e7d
-    });
-
+    let wavesContainer = null;
     const wavesBackground = VANTA.WAVES({
         el: cardBackground,
         mouseControls: true,
@@ -612,6 +601,33 @@
         attackSumInterval = null;
     };
 
+    // Background con movimiento
+    const toggleBackgroundContainer = (value, save = true) => {
+        if(typeof value === 'undefined'){
+            value = getPlayerData("backgroundOn", true);
+            value = !value;
+        }
+
+        if(wavesContainer){
+            wavesContainer.destroy();
+            wavesContainer = null;
+        }
+        if(value){
+            wavesContainer = VANTA.WAVES({
+                el: container,
+                mouseControls: true,
+                touchControls: true,
+                gyroControls: false,
+                minHeight: 960,
+                minWidth: 540,
+                scale: 1.00,
+                scaleMobile: 1.00,
+                color: 0x255e7d
+            });
+        }
+        if(save) setPlayerData("backgroundOn", value);
+    }
+
     // Compartir card
     const shareCard = async _ => {
         // Remover animacion
@@ -655,9 +671,8 @@
 
     /** Botones */
     document.querySelector("[data-action=change]").addEventListener("click", _ => { characterIndexUpdate(); attacksRandom(); });
-    document.querySelector("[data-action=share]").addEventListener("click", _ => {
-        shareCard();
-    })
+    document.querySelector("[data-action=share]").addEventListener("click", _ => { shareCard(); });
+    document.querySelector("[data-action=background]").addEventListener("click", _ => { toggleBackgroundContainer(); });
 
     // Determinar eventos
     const touchAvailable = 'ontouchstart' in document.documentElement;
@@ -684,7 +699,7 @@
 
     const getPlayerData = (key = null, defaultValue = null) => {
         const playerData = JSON.parse(localStorage.getItem("playerData")) || {};
-        return key? ( playerData[ key ] || defaultValue ) : playerData;
+        return key? ( playerData[ key ] != undefined? playerData[ key] : defaultValue ) : playerData;
     };
 
     // Completar los datos iniciales del jugador
@@ -694,4 +709,5 @@
     characterIndexSet(originalPlayerData.character, false);
     staticticsInit(originalPlayerData.qlPoints, originalPlayerData.ranking);
     attacksInit(originalPlayerData.rock, originalPlayerData.paper, originalPlayerData.scissors);
+    toggleBackgroundContainer(typeof originalPlayerData.backgroundOn == "boolean"? originalPlayerData.backgroundOn : true, false);
 })();
