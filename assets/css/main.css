@@ -114,6 +114,10 @@ body{
     animation: cardShow .5s forwards ease-out;
 }
 
+.card.show-reverse{
+    animation: cardShowReverse .5s forwards ease-out;
+}
+
 .card .text{
     position: relative;
     z-index: 1;
@@ -191,7 +195,7 @@ body{
 }
 
 .card > .content > .header > .name > input::placeholder{
-    color: var(--white);
+    color: var(--blue);
 }
 
 .card > .content > .header > .name > input:focus{
@@ -263,6 +267,12 @@ body{
     height: 28px;
     background-repeat: no-repeat;
     background-size: cover;
+    transition: transform 0.1s ease-in-out, filter 0.1s ease-in-out;
+}
+
+.card > .content > .body > .stats > [data-stat]:active > .changers *{
+    transform: scale(.9);
+    filter: brightness(1.1);
 }
 
 .card > .content > .body > .stats > [data-stat=rock] > .icon{
@@ -355,28 +365,80 @@ body{
     grid-auto-flow: column;
     gap: 20px;
     justify-content: center;
+    align-items: center;
     position: fixed;
-    bottom: 0;
+    bottom: 20px;
     left: 0;
     right: 0;
+    transition: transform 0.2s ease-in-out;
 }
 
-.button{
+.actions > *{
     display: grid;
-    padding: var(--card-padding) 50px;
-    background-color: var(--blue);
-    border: 4px solid var(--white);
-    border-bottom: none;
-    border-radius: var(--card-padding) var(--card-radius) 0px 0px;
     cursor: pointer;
+    transition: transform 0.1s ease-in-out, filter 0.1s ease-in-out;
     user-select: none;
+    -webkit-tap-highlight-color:transparent;
 }
 
+.actions > *:active{
+    transform: scale(.9);
+    filter: brightness(1.1);
+}
+
+.actions > [data-action=prev], .actions > [data-action=next]{
+    width: 64px;
+    height: 46px;
+}
+
+.actions > [data-action=random]{
+    width: 76px;
+    height: 61px;
+}
+
+.actions > [data-action=share]{
+    width: 61px;
+    height: 63px;
+}
+
+.actions > [data-action=background]{
+    width: 65px;
+    height: 67px;
+    filter: grayscale(0);
+    transition: filter 0.1s ease-in-out;
+}
+
+.actions > [data-action=background].disabled{
+    filter: grayscale(1);
+}
+
+@media (max-width: 470px) {
+    .actions{
+        transform: scale(0.8);
+    }
+}
+
+@media (max-width: 370px) {
+    .actions{
+        transform: scale(0.7);
+    }
+}
 
 @keyframes cardShow {
     from{
         opacity: 0;
         transform: rotate(8deg) translate(100px,10px);
+    }
+    to{
+        opacity: 1;
+        transform: rotate(0deg) translate(0px,0px);
+    }
+}
+
+@keyframes cardShowReverse {
+    from{
+        opacity: 0;
+        transform: rotate(-8deg) translate(-100px,-10px);
     }
     to{
         opacity: 1;
@@ -399,6 +461,17 @@ body{
             transform: scale(.7) rotate(0deg) translate(0px,0px);
         }
     }
+
+    @keyframes cardShowReverse {
+        from{
+            opacity: 0;
+            transform: scale(.7) rotate(-8deg) translate(-100px,10px);
+        }
+        to{
+            opacity: 1;
+            transform: scale(.7) rotate(0deg) translate(0px,0px);
+        }
+    }
 }
 
 @media (max-width: 380px) {
@@ -410,6 +483,17 @@ body{
         from{
             opacity: 0;
             transform: scale(.6) rotate(8deg) translate(100px,10px);
+        }
+        to{
+            opacity: 1;
+            transform: scale(.6) rotate(0deg) translate(0px,0px);
+        }
+    }
+
+    @keyframes cardShowReverse {
+        from{
+            opacity: 0;
+            transform: scale(.6) rotate(-8deg) translate(-100px,-10px);
         }
         to{
             opacity: 1;

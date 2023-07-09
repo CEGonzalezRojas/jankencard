@@ -37,20 +37,20 @@
     const rockTarget = card.querySelector(".stats [data-stat=rock]");
     const paperTarget = card.querySelector(".stats [data-stat=paper]");
     const scissorsTarget = card.querySelector(".stats [data-stat=scissors]");
+    const buttons = {
+        random: document.querySelector("[data-action=random]"),
+        next: document.querySelector("[data-action=next]"),
+        prev: document.querySelector("[data-action=prev]"),
+        share: document.querySelector("[data-action=share]"),
+        background: document.querySelector("[data-action=background]")
+    };
+
+    // Personaje
+    let characterIndex = 0;
+    let characterDirection = 1;
 
     // Vantas
-    const wavesContainer = VANTA.WAVES({
-        el: container,
-        mouseControls: true,
-        touchControls: true,
-        gyroControls: false,
-        minHeight: 960,
-        minWidth: 540,
-        scale: 1.00,
-        scaleMobile: 1.00,
-        color: 0x6c5855
-    });
-
+    let wavesContainer = null;
     const wavesBackground = VANTA.WAVES({
         el: cardBackground,
         mouseControls: true,
@@ -442,15 +442,21 @@
         }
     ];
 
-    let characterIndex = 0;
     const characterIndexUpdate = (direction = 1, save = true) => {
         characterIndex += direction > 0? 1 : -1;
+        characterDirection = direction;
         if(characterIndex >= characters.length) characterIndex = 0;
         else if(characterIndex < 0) characterIndex = characters.length - 1;
         if(save) setPlayerData("character", characterIndex);
         characterUpdate();
-        staticticsRandom();
     }
+
+    const characterRandom = _ => {
+        const randomIndex = Math.floor( Math.random() * characters.length );
+        characterIndexSet(randomIndex);
+        staticticsRandom();
+    };
+
     const characterIndexSet = (index = 0, save = true) => {
         if(index < 0 || index >= characters.length ) return;
         characterIndex = index;
@@ -463,6 +469,7 @@
         lazyLoad.preload( selectedCharacter.url, characterDisplayer, "img" );
         lazyLoad.preload( selectedCharacter.mask, cardBackgroundMask, "background" );
     };
+
     characterDisplayer.addEventListener("lazyLoad", _ => {
         const selectedCharacter = characters[characterIndex];
         
@@ -482,8 +489,9 @@
 
         // Mostrar card
         card.classList.remove("show");
+        card.classList.remove("show-reverse");
         void card.offsetWidth;
-        card.classList.add("show");
+        card.classList.add( characterDirection > 0? "show" : "show-reverse");
 
         // Estilo card
         cardBackground.style.backgroundColor = `var(${selectedCharacter.colors.card})`;
@@ -612,10 +620,44 @@
         attackSumInterval = null;
     };
 
+    // Background con movimiento
+    const toggleBackgroundContainer = (value, save = true) => {
+        if(typeof value === 'undefined'){
+            value = getPlayerData("backgroundOn", true);
+            value = !value;
+        }
+
+        if(wavesContainer){
+            wavesContainer.destroy();
+            wavesContainer = null;
+        }
+        if(value){
+            wavesContainer = VANTA.WAVES({
+                el: container,
+                mouseControls: true,
+                touchControls: true,
+                gyroControls: false,
+                minHeight: 960,
+                minWidth: 540,
+                scale: 1.00,
+                scaleMobile: 1.00,
+                color: 0x255e7d
+            });
+            buttons.background.classList.remove("disabled");
+        }
+        else{    
+            buttons.background.classList.add("disabled");
+        }
+
+        if(save) setPlayerData("backgroundOn", value);
+        
+    }
+
     // Compartir card
     const shareCard = async _ => {
         // Remover animacion
         card.classList.remove("show");
+        card.classList.remove("show-reverse");
 
         html2canvas(container, {width: 540, windowWidth: 540, height: 960, windowHeight: 960, backgroundColor: "#4cbcf8", allowTaint: true, useCORS: true, ignoreElements: element => {
             if(element.classList.contains("changers")) return true;
@@ -654,10 +696,11 @@
     }
 
     /** Botones */
-    document.querySelector("[data-action=change]").addEventListener("click", _ => { characterIndexUpdate(); attacksRandom(); });
-    document.querySelector("[data-action=share]").addEventListener("click", _ => {
-        shareCard();
-    })
+    buttons.random.addEventListener("click", _ => { characterRandom(); attacksRandom(); });
+    buttons.next.addEventListener("click", _ => { characterIndexUpdate();});
+    buttons.prev.addEventListener("click", _ => { characterIndexUpdate(-1);});
+    buttons.share.addEventListener("click", _ => { shareCard(); });
+    buttons.background.addEventListener("click", _ => { toggleBackgroundContainer(); });
 
     // Determinar eventos
     const touchAvailable = 'ontouchstart' in document.documentElement;
@@ -684,7 +727,7 @@
 
     const getPlayerData = (key = null, defaultValue = null) => {
         const playerData = JSON.parse(localStorage.getItem("playerData")) || {};
-        return key? ( playerData[ key ] || defaultValue ) : playerData;
+        return key? ( playerData[ key ] != undefined? playerData[ key] : defaultValue ) : playerData;
     };
 
     // Completar los datos iniciales del jugador
@@ -694,4 +737,5 @@
     characterIndexSet(originalPlayerData.character, false);
     staticticsInit(originalPlayerData.qlPoints, originalPlayerData.ranking);
     attacksInit(originalPlayerData.rock, originalPlayerData.paper, originalPlayerData.scissors);
+    toggleBackgroundContainer(typeof originalPlayerData.backgroundOn == "boolean"? originalPlayerData.backgroundOn : true, false);
 })();
