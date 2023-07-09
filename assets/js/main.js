@@ -91,7 +91,6 @@
         {
             url: "/assets/images/characters/ryusei.png",
             style: {
-                width: "90%",
                 top: "30px",
                 right: "-30px"
             },
@@ -108,7 +107,6 @@
         {
             url: "/assets/images/characters/jade.png",
             style: {
-                width: "91%",
                 left: "-30px",
             },
             colors: {
@@ -125,10 +123,9 @@
         {
             url: "/assets/images/characters/oriax.png",
             style: {
-                width: "41%",
                 transform: "rotate(-20deg)",
-                top: "69px",
-                left: "46px"
+                top: "66px",
+                left: "24px"
             },
             colors: {
                 card: '--card-blue-a',
@@ -144,8 +141,7 @@
         {
             url: "/assets/images/characters/sakura.png",
             style: {
-                width: "110%",
-                bottom: "0px",
+                bottom: "-20px",
                 right: "-40px"
             },
             colors: {
@@ -162,8 +158,7 @@
         {
             url: "/assets/images/characters/joaquin.png",
             style: {
-                width: "86%",
-                bottom: "-86px",
+                bottom: "-102px",
                 left: "-46px",
             },
             colors: {
@@ -181,7 +176,6 @@
         {
             url: "/assets/images/characters/airini.png",
             style: {
-                width: "96%",
                 left: "-40px",
                 bottom: "0px"
             },
@@ -199,7 +193,6 @@
         {
             url: "/assets/images/characters/barry.png",
             style: {
-                width: "72%",
                 left: "-20px",
                 bottom: "-120px"
             },
@@ -217,7 +210,6 @@
         {
             url: "/assets/images/characters/misae.png",
             style: {
-                width: "83%",
                 left: "-41px",
                 bottom: "-91px"
             },
@@ -235,7 +227,6 @@
         {
             url: "/assets/images/characters/matsuo.png",
             style: {
-                width: "88%",
                 right: "-30px",
                 bottom: "-10px"
             },
@@ -252,7 +243,6 @@
         {
             url: "/assets/images/characters/juanita.png",
             style:{
-                width: "61%",
                 bottom: "-15px"
             },
             colors: {
@@ -269,7 +259,6 @@
         {
             url: "/assets/images/characters/duo.png",
             style:{
-                width: "84%",
                 left: "-40px",
                 bottom: "10px"
             },
@@ -287,7 +276,6 @@
         {
             url: "/assets/images/characters/arataka.png",
             style: {
-                width: "72%",
                 top: "108px",
                 left: "-30px"
             },
@@ -305,9 +293,8 @@
         {
             url: "/assets/images/characters/matriara.png",
             style: {
-                width: "120%",
-                left: "-50px",
-                bottom: "9px"
+                left: "-56px",
+                bottom: "-10px"
             },
             colors: {
                 card: '--card-red-a',
@@ -322,7 +309,6 @@
         {
             url: "/assets/images/characters/salfate.png",
             style: {
-                width: "118%",
                 right: "-40px",
                 bottom: "0"
             },
@@ -339,7 +325,6 @@
         {
             url: "/assets/images/characters/miaufin.png",
             style: {
-                width: "73%",
                 left: "-25px",
                 bottom: "-4px"
             },
@@ -357,10 +342,8 @@
         {
             url: "/assets/images/characters/aru.png",
             style: {
-                width: "99%",
-                left: "23px",
-                top: "135px",
-                transform: "rotate(12deg)"
+                left: "56px",
+                top: "132px"
             },
             colors: {
                 card: '--card-purple-a',
@@ -375,7 +358,6 @@
         {
             url: "/assets/images/characters/remi.png",
             style: {
-                width: "107%",
                 left: "6px",
                 bottom: "-23px"
             },
@@ -392,8 +374,7 @@
         {
             url: "/assets/images/characters/haramiyo.png",
             style: {
-                width: "88%",
-                left: "-42px",
+                left: "-22px",
                 top: "155px"
             },
             colors: {
@@ -410,7 +391,6 @@
         {
             url: "/assets/images/characters/tesuda.png",
             style: {
-                width: "74%",
                 left: "140px",
                 top: "144px"
             },
@@ -427,7 +407,6 @@
         {
             url: "/assets/images/characters/zoilah.png",
             style: {
-                width: "82%",
                 left: "76px",
                 bottom: "-112px"
             },
@@ -444,7 +423,6 @@
         {
             url: "/assets/images/characters/rafaelbudu.png",
             style: {
-                width: "99%",
                 right: "-70px",
                 top: "140px"
             },
