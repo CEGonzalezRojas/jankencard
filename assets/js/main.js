@@ -48,7 +48,7 @@
         minWidth: 540,
         scale: 1.00,
         scaleMobile: 1.00,
-        color: 0x6c5855
+        color: 0x255e7d
     });
 
     const wavesBackground = VANTA.WAVES({
