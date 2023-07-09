@@ -114,6 +114,10 @@ body{
     animation: cardShow .5s forwards ease-out;
 }
 
+.card.show-reverse{
+    animation: cardShowReverse .5s forwards ease-out;
+}
+
 .card .text{
     position: relative;
     z-index: 1;
@@ -372,11 +376,21 @@ body{
     user-select: none;
 }
 
-
 @keyframes cardShow {
     from{
         opacity: 0;
         transform: rotate(8deg) translate(100px,10px);
+    }
+    to{
+        opacity: 1;
+        transform: rotate(0deg) translate(0px,0px);
+    }
+}
+
+@keyframes cardShowReverse {
+    from{
+        opacity: 0;
+        transform: rotate(-8deg) translate(-100px,-10px);
     }
     to{
         opacity: 1;
@@ -399,6 +413,17 @@ body{
             transform: scale(.7) rotate(0deg) translate(0px,0px);
         }
     }
+
+    @keyframes cardShowReverse {
+        from{
+            opacity: 0;
+            transform: scale(.7) rotate(-8deg) translate(-100px,10px);
+        }
+        to{
+            opacity: 1;
+            transform: scale(.7) rotate(0deg) translate(0px,0px);
+        }
+    }
 }
 
 @media (max-width: 380px) {
@@ -410,6 +435,17 @@ body{
         from{
             opacity: 0;
             transform: scale(.6) rotate(8deg) translate(100px,10px);
+        }
+        to{
+            opacity: 1;
+            transform: scale(.6) rotate(0deg) translate(0px,0px);
+        }
+    }
+
+    @keyframes cardShowReverse {
+        from{
+            opacity: 0;
+            transform: scale(.6) rotate(-8deg) translate(-100px,-10px);
         }
         to{
             opacity: 1;

@@ -38,6 +38,10 @@
     const paperTarget = card.querySelector(".stats [data-stat=paper]");
     const scissorsTarget = card.querySelector(".stats [data-stat=scissors]");
 
+    // Personaje
+    let characterIndex = 0;
+    let characterDirection = 1;
+
     // Vantas
     let wavesContainer = null;
     const wavesBackground = VANTA.WAVES({
@@ -431,9 +435,9 @@
         }
     ];
 
-    let characterIndex = 0;
     const characterIndexUpdate = (direction = 1, save = true) => {
         characterIndex += direction > 0? 1 : -1;
+        characterDirection = direction;
         if(characterIndex >= characters.length) characterIndex = 0;
         else if(characterIndex < 0) characterIndex = characters.length - 1;
         if(save) setPlayerData("character", characterIndex);
@@ -452,6 +456,7 @@
         lazyLoad.preload( selectedCharacter.url, characterDisplayer, "img" );
         lazyLoad.preload( selectedCharacter.mask, cardBackgroundMask, "background" );
     };
+
     characterDisplayer.addEventListener("lazyLoad", _ => {
         const selectedCharacter = characters[characterIndex];
         
@@ -471,8 +476,9 @@
 
         // Mostrar card
         card.classList.remove("show");
+        card.classList.remove("show-reverse");
         void card.offsetWidth;
-        card.classList.add("show");
+        card.classList.add( characterDirection > 0? "show" : "show-reverse");
 
         // Estilo card
         cardBackground.style.backgroundColor = `var(${selectedCharacter.colors.card})`;
@@ -632,6 +638,7 @@
     const shareCard = async _ => {
         // Remover animacion
         card.classList.remove("show");
+        card.classList.remove("show-reverse");
 
         html2canvas(container, {width: 540, windowWidth: 540, height: 960, windowHeight: 960, backgroundColor: "#4cbcf8", allowTaint: true, useCORS: true, ignoreElements: element => {
             if(element.classList.contains("changers")) return true;
