@@ -761,4 +761,12 @@
     staticticsInit(originalPlayerData.qlPoints, originalPlayerData.ranking);
     attacksInit(originalPlayerData.rock, originalPlayerData.paper, originalPlayerData.scissors);
     toggleBackgroundContainer(typeof originalPlayerData.backgroundOn == "boolean"? originalPlayerData.backgroundOn : true, false);
+
+    // PWA
+    if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function() {
+          navigator.serviceWorker
+            .register("/sw.js")
+        })
+    };
 })();
