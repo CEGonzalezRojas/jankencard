@@ -296,10 +296,166 @@
                 footer: '--card-green-b',
                 cardEffect: 0x5f856f
             },
-            mask: "/assets/images/others/mask/card-mask-gray-b.png",
+            mask: "/assets/images/others/mask/card-mask-green-c.png",
             stats: {
                 right: "20px",
                 top: "40%"
+            }
+        },
+        {
+            url: "/assets/images/characters/matriara.png",
+            style: {
+                width: "120%",
+                left: "-50px",
+                bottom: "9px"
+            },
+            colors: {
+                card: '--card-red-a',
+                footer: '--card-red-b',
+                cardEffect: 0xba2626
+            },
+            mask: "/assets/images/others/mask/card-mask-red-c.png",
+            stats: {
+                bottom: "5%"
+            }
+        },
+        {
+            url: "/assets/images/characters/salfate.png",
+            style: {
+                width: "118%",
+                right: "-40px",
+                bottom: "0"
+            },
+            colors: {
+                card: '--card-blue-a',
+                footer: '--card-blue-b',
+                cardEffect: 0x57698e
+            },
+            mask: "/assets/images/others/mask/card-mask-blue-c.png",
+            stats: {
+                top: "30%"
+            }
+        },
+        {
+            url: "/assets/images/characters/miaufin.png",
+            style: {
+                width: "73%",
+                left: "-25px",
+                bottom: "-4px"
+            },
+            colors: {
+                card: '--card-green-a',
+                footer: '--card-green-b',
+                cardEffect: 0x5f856f
+            },
+            mask: "/assets/images/others/mask/card-mask-green-b.png",
+            stats: {
+                top: "30%",
+                right: "20px"
+            }
+        },
+        {
+            url: "/assets/images/characters/aru.png",
+            style: {
+                width: "99%",
+                left: "23px",
+                top: "135px",
+                transform: "rotate(12deg)"
+            },
+            colors: {
+                card: '--card-purple-a',
+                footer: '--card-purple-b',
+                cardEffect: 0x57698e
+            },
+            mask: "/assets/images/others/mask/card-mask-purple-c.png",
+            stats: {
+                bottom: "0"
+            }
+        },
+        {
+            url: "/assets/images/characters/remi.png",
+            style: {
+                width: "107%",
+                left: "6px",
+                bottom: "-23px"
+            },
+            colors: {
+                card: '--card-blue-a',
+                footer: '--card-blue-b',
+                cardEffect: 0x393459
+            },
+            mask: "/assets/images/others/mask/card-mask-blue-e.png",
+            stats: {
+                top: "30%"
+            }
+        },
+        {
+            url: "/assets/images/characters/haramiyo.png",
+            style: {
+                width: "88%",
+                left: "-42px",
+                top: "155px"
+            },
+            colors: {
+                card: '--card-pink-a',
+                footer: '--card-pink-b',
+                cardEffect: 0xd34c41
+            },
+            mask: "/assets/images/others/mask/card-mask-pink-c.png",
+            stats: {
+                top: "25%",
+                right: "20px",
+            }
+        },
+        {
+            url: "/assets/images/characters/tesuda.png",
+            style: {
+                width: "74%",
+                left: "140px",
+                top: "144px"
+            },
+            colors: {
+                card: '--card-sky-a',
+                footer: '--card-sky-b',
+                cardEffect: 0x709aa3
+            },
+            mask: "/assets/images/others/mask/card-mask-sky-b.png",
+            stats: {
+                top: "30%"
+            }
+        },
+        {
+            url: "/assets/images/characters/zoilah.png",
+            style: {
+                width: "82%",
+                left: "76px",
+                bottom: "-112px"
+            },
+            colors: {
+                card: '--card-yellow-a',
+                footer: '--card-yellow-b',
+                cardEffect: 0xce8d2d
+            },
+            mask: "/assets/images/others/mask/card-mask-yellow-b.png",
+            stats: {
+                bottom: "20px"
+            }
+        },
+        {
+            url: "/assets/images/characters/rafaelbudu.png",
+            style: {
+                width: "99%",
+                right: "-70px",
+                top: "140px"
+            },
+            colors: {
+                card: '--card-red-a',
+                footer: '--card-red-b',
+                cardEffect: 0x393459
+            },
+            mask: "/assets/images/others/mask/card-mask-blue-d.png",
+            stats: {
+                top: "25%"
             }
         }
     ];
@@ -342,12 +498,16 @@
         }
         characterStats.style = statsStyle;
 
+        // Mostrar card
+        card.classList.remove("show");
+        void card.offsetWidth;
+        card.classList.add("show");
+
         // Estilo card
         cardBackground.style.backgroundColor = `var(${selectedCharacter.colors.card})`;
         cardFooter.style.backgroundColor = `var(${selectedCharacter.colors.footer})`;
 
         // Efecto
-        wavesContainer.setOptions({ color: selectedCharacter.colors.backgroundEffect });
         wavesBackground.setOptions({ color: selectedCharacter.colors.cardEffect });
     });
 
@@ -458,6 +618,9 @@
 
     // Compartir card
     const shareCard = async _ => {
+        // Remover animacion
+        card.classList.remove("show");
+
         html2canvas(container, {width: 540, windowWidth: 540, height: 960, windowHeight: 960, backgroundColor: "#4cbcf8", allowTaint: true, useCORS: true, ignoreElements: element => {
             if(element.classList.contains("changers")) return true;
         }}).then(async (canvas) => {
