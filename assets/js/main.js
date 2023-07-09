@@ -701,8 +701,9 @@
         }}).then(async (canvas) => {
 
             const dataUrl = canvas.toDataURL();
-
+            let sharedSuccess = false;
             if(navigator.canShare){
+
                 const blob = await (await fetch(dataUrl)).blob();
                 const filesArray = [
                     new File(
@@ -722,11 +723,14 @@
                     url: "https://card.jankenup.com/",
                     files: filesArray
                 };
-                navigator.clipboard.writeText("https://card.jankenup.com/");
-                navigator.share(shareData);
-                sentEvent(GEvents.card_share, {"language": Localization.GetSelectedLanguage()});
+
+                if(navigator.canShare(shareData)){
+                    navigator.share(shareData);
+                    sharedSuccess = true;
+                }
             }
-            else{
+
+            if(!sharedSuccess){
                 var link = document.createElement("a");
                 document.body.appendChild(link);
                 link.download = `${getPlayerData("name","noname")}-jankencard.png`;
@@ -734,6 +738,8 @@
                 link.target = '_blank';
                 link.click();
             }
+            navigator.clipboard.writeText("https://card.jankenup.com/");
+            sentEvent(GEvents.card_share, {"language": Localization.GetSelectedLanguage()});
         });
     }
 
