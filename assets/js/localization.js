@@ -17,7 +17,9 @@ class Localization{
                 rock: "Rock",
                 paper: "Paper",
                 scissors: "Scissors",
-                shareText: "This is my JanKenUP card! Create yours at https://card.jankenup.com"
+                shareText: "This is my JanKenUP card! Create yours at https://card.jankenup.com",
+                pageTitle: "JanKenUp! Card - Humita Games",
+                pageDescription: "Create your own JanKen UP card!"
             },
 
             es: {
@@ -28,7 +30,9 @@ class Localization{
                 rock: "Piedra",
                 paper: "Papel",
                 scissors: "Tijeras",
-                shareText: "Esta es mi carta de JanKenUP! Crea la tuya en https://card.jankenup.com"
+                shareText: "Esta es mi carta de JanKenUP! Crea la tuya en https://card.jankenup.com",
+                pageTitle: "Carta JanKenUp! - Humita Games",
+                pageDescription: "¡Crea tu propia carta de JanKenUP!"
             },
 
             ja: {
@@ -39,7 +43,9 @@ class Localization{
                 rock: "グー",
                 paper: "パー",
                 scissors: "チョキ",
-                shareText: "これは私のJanKenUPカードです！https://card.jankenup.com であなたのカードを作成してください。"
+                shareText: "これは私のJanKenUPカードです！https://card.jankenup.com であなたのカードを作成してください。",
+                pageTitle: "JanKenUP！ カード - Humita ゲーム",
+                pageDescription: "自分だけのJanKen UPカードを作ろう！"
             }
 
         }
@@ -50,7 +56,7 @@ class Localization{
     static GetTranslate( page, key, values, element, attributeTarget ){
         
         let language = navigator.language.toLowerCase();
-        
+
         // Permitiremos ciertos lenguajes con su codigo completo
         if( Localization.allowedCompoundLanguage.indexOf(language) == -1 ) language = language.split("-")[0];
         if( Localization.validLanguage.indexOf(language) == -1 ) language = Localization.validLanguage[0]; 
