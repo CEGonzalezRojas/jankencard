@@ -16,7 +16,8 @@ class Localization{
                 team: "Team {0}",
                 rock: "Rock",
                 paper: "Paper",
-                scissors: "Scissors"
+                scissors: "Scissors",
+                shareText: "This is my JanKenUP card! Create yours at https://card.jankenup.com"
             },
 
             es: {
@@ -26,7 +27,8 @@ class Localization{
                 team: "Equipo {0}",
                 rock: "Piedra",
                 paper: "Papel",
-                scissors: "Tijeras"
+                scissors: "Tijeras",
+                shareText: "Esta es mi carta de JanKenUP! Crea la tuya en https://card.jankenup.com"
             },
 
             ja: {
@@ -36,7 +38,8 @@ class Localization{
                 team: "{0}団",
                 rock: "グー",
                 paper: "パー",
-                scissors: "チョキ"
+                scissors: "チョキ",
+                shareText: "これは私のJanKenUPカードです！https://card.jankenup.com であなたのカードを作成してください。"
             }
 
         }

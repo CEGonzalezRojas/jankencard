@@ -623,9 +623,14 @@
                 }
                 )
             ];
+            const text = Localization.GetTranslate("main","shareText");
             const shareData = {
-                files: filesArray,
+                title: "JanKenCard!",
+                text: text,
+                url: "https://card.jankenup.com/",
+                files: filesArray
             };
+            navigator.clipboard.writeText(text);
             navigator.share(shareData);
         });
     }
