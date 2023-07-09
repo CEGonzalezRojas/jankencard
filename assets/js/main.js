@@ -76,6 +76,12 @@
     let attackSumInterval;
     const attackSumIntervalDelta = 100;
 
+    // Tipos de eventos
+    const GEvents = {
+        characterSelect: "character_select",
+        card_share: "card_share"
+    };
+
     // Legenda en titulo
     tippy( pageTitle, {
         content: Localization.GetTranslate("main", "legend")
@@ -99,6 +105,7 @@
     // Cambio de personaje
     const characters = [
         {
+            name: "ryusei",
             url: "/assets/images/characters/ryusei.png",
             style: {
                 top: "30px",
@@ -115,6 +122,7 @@
             }
         },
         {
+            name: "jade",
             url: "/assets/images/characters/jade.png",
             style: {
                 left: "-30px",
@@ -131,6 +139,7 @@
             }
         },
         {
+            name: "oriax",
             url: "/assets/images/characters/oriax.png",
             style: {
                 transform: "rotate(-20deg)",
@@ -149,6 +158,7 @@
             }
         },
         {
+            name: "sakura",
             url: "/assets/images/characters/sakura.png",
             style: {
                 bottom: "-20px",
@@ -166,6 +176,7 @@
             }
         },
         {
+            name: "joaquin",
             url: "/assets/images/characters/joaquin.png",
             style: {
                 bottom: "-102px",
@@ -184,6 +195,7 @@
             }
         },
         {
+            name: "aarini",
             url: "/assets/images/characters/airini.png",
             style: {
                 left: "-40px",
@@ -201,6 +213,7 @@
             }
         },
         {
+            name: "barry",
             url: "/assets/images/characters/barry.png",
             style: {
                 left: "-20px",
@@ -218,6 +231,7 @@
             }
         },
         {
+            name: "misae",
             url: "/assets/images/characters/misae.png",
             style: {
                 left: "-41px",
@@ -235,6 +249,7 @@
             }
         },
         {
+            name: "matsuo",
             url: "/assets/images/characters/matsuo.png",
             style: {
                 right: "-30px",
@@ -251,6 +266,7 @@
             }
         },
         {
+            name: "juanita",
             url: "/assets/images/characters/juanita.png",
             style:{
                 bottom: "-15px"
@@ -267,6 +283,7 @@
             }
         },
         {
+            name: "duo",
             url: "/assets/images/characters/duo.png",
             style:{
                 left: "-40px",
@@ -284,6 +301,7 @@
             }
         },
         {
+            name: "arataka",
             url: "/assets/images/characters/arataka.png",
             style: {
                 top: "108px",
@@ -301,6 +319,7 @@
             }
         },
         {
+            name: "matriara",
             url: "/assets/images/characters/matriara.png",
             style: {
                 left: "-56px",
@@ -317,6 +336,7 @@
             }
         },
         {
+            name: "salfate",
             url: "/assets/images/characters/salfate.png",
             style: {
                 right: "-40px",
@@ -333,6 +353,7 @@
             }
         },
         {
+            name: "miaufin",
             url: "/assets/images/characters/miaufin.png",
             style: {
                 left: "-25px",
@@ -350,6 +371,7 @@
             }
         },
         {
+            name: "aru",
             url: "/assets/images/characters/aru.png",
             style: {
                 left: "56px",
@@ -366,6 +388,7 @@
             }
         },
         {
+            name: "remi",
             url: "/assets/images/characters/remi.png",
             style: {
                 left: "6px",
@@ -382,6 +405,7 @@
             }
         },
         {
+            name: "haramiyo",
             url: "/assets/images/characters/haramiyo.png",
             style: {
                 left: "-22px",
@@ -399,6 +423,7 @@
             }
         },
         {
+            name: "tesuda",
             url: "/assets/images/characters/tesuda.png",
             style: {
                 left: "140px",
@@ -415,6 +440,7 @@
             }
         },
         {
+            name: "zoilah",
             url: "/assets/images/characters/zoilah.png",
             style: {
                 left: "76px",
@@ -431,6 +457,7 @@
             }
         },
         {
+            name: "rafaelbudu",
             url: "/assets/images/characters/rafaelbudu.png",
             style: {
                 right: "-70px",
@@ -453,7 +480,11 @@
         characterDirection = direction;
         if(characterIndex >= characters.length) characterIndex = 0;
         else if(characterIndex < 0) characterIndex = characters.length - 1;
-        if(save) setPlayerData("character", characterIndex);
+        const selectedCharacter = characters[characterIndex];
+        if(save) {
+            setPlayerData("character", characterIndex);
+            sentEvent(GEvents.characterSelect, selectedCharacter.name);
+        }
         characterUpdate();
     }
 
@@ -689,10 +720,16 @@
                 url: "https://card.jankenup.com/",
                 files: filesArray
             };
-            navigator.clipboard.writeText(text);
+            navigator.clipboard.writeText("https://card.jankenup.com/");
             navigator.share(shareData);
+            sentEvent(GEvents.card_share);
         });
     }
+
+    const sentEvent = (name, value ,data = null) => {
+        if(!name || !value) return;
+        if(typeof gtag == 'undefined') gtag(name, value, data);
+    };
 
     /** Botones */
     buttons.random.addEventListener("click", _ => { characterRandom(); attacksRandom(); });
