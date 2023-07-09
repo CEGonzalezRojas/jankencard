@@ -442,8 +442,14 @@
         else if(characterIndex < 0) characterIndex = characters.length - 1;
         if(save) setPlayerData("character", characterIndex);
         characterUpdate();
-        staticticsRandom();
     }
+
+    const characterRandom = _ => {
+        const randomIndex = Math.floor( Math.random() * characters.length );
+        characterIndexSet(randomIndex);
+        staticticsRandom();
+    };
+
     const characterIndexSet = (index = 0, save = true) => {
         if(index < 0 || index >= characters.length ) return;
         characterIndex = index;
@@ -677,7 +683,9 @@
     }
 
     /** Botones */
-    document.querySelector("[data-action=change]").addEventListener("click", _ => { characterIndexUpdate(); attacksRandom(); });
+    document.querySelector("[data-action=random]").addEventListener("click", _ => { characterRandom(); attacksRandom(); });
+    document.querySelector("[data-action=next]").addEventListener("click", _ => { characterIndexUpdate();});
+    document.querySelector("[data-action=prev]").addEventListener("click", _ => { characterIndexUpdate(-1);});
     document.querySelector("[data-action=share]").addEventListener("click", _ => { shareCard(); });
     document.querySelector("[data-action=background]").addEventListener("click", _ => { toggleBackgroundContainer(); });
 
