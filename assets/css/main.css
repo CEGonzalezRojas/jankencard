@@ -365,10 +365,12 @@ body{
     grid-auto-flow: column;
     gap: 20px;
     justify-content: center;
+    align-items: center;
     position: fixed;
     bottom: 20px;
     left: 0;
     right: 0;
+    transition: transform 0.2s ease-in-out;
 }
 
 .actions > *{
@@ -385,8 +387,41 @@ body{
 }
 
 .actions > [data-action=prev], .actions > [data-action=next]{
-    width: 100px;
-    height: 72px;
+    width: 64px;
+    height: 46px;
+}
+
+.actions > [data-action=random]{
+    width: 76px;
+    height: 61px;
+}
+
+.actions > [data-action=share]{
+    width: 61px;
+    height: 63px;
+}
+
+.actions > [data-action=background]{
+    width: 65px;
+    height: 67px;
+    filter: grayscale(0);
+    transition: filter 0.1s ease-in-out;
+}
+
+.actions > [data-action=background].disabled{
+    filter: grayscale(1);
+}
+
+@media (max-width: 470px) {
+    .actions{
+        transform: scale(0.8);
+    }
+}
+
+@media (max-width: 370px) {
+    .actions{
+        transform: scale(0.7);
+    }
 }
 
 @keyframes cardShow {

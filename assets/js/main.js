@@ -37,6 +37,13 @@
     const rockTarget = card.querySelector(".stats [data-stat=rock]");
     const paperTarget = card.querySelector(".stats [data-stat=paper]");
     const scissorsTarget = card.querySelector(".stats [data-stat=scissors]");
+    const buttons = {
+        random: document.querySelector("[data-action=random]"),
+        next: document.querySelector("[data-action=next]"),
+        prev: document.querySelector("[data-action=prev]"),
+        share: document.querySelector("[data-action=share]"),
+        background: document.querySelector("[data-action=background]")
+    };
 
     // Personaje
     let characterIndex = 0;
@@ -636,8 +643,14 @@
                 scaleMobile: 1.00,
                 color: 0x255e7d
             });
+            buttons.background.classList.remove("disabled");
         }
+        else{    
+            buttons.background.classList.add("disabled");
+        }
+
         if(save) setPlayerData("backgroundOn", value);
+        
     }
 
     // Compartir card
@@ -683,11 +696,11 @@
     }
 
     /** Botones */
-    document.querySelector("[data-action=random]").addEventListener("click", _ => { characterRandom(); attacksRandom(); });
-    document.querySelector("[data-action=next]").addEventListener("click", _ => { characterIndexUpdate();});
-    document.querySelector("[data-action=prev]").addEventListener("click", _ => { characterIndexUpdate(-1);});
-    document.querySelector("[data-action=share]").addEventListener("click", _ => { shareCard(); });
-    document.querySelector("[data-action=background]").addEventListener("click", _ => { toggleBackgroundContainer(); });
+    buttons.random.addEventListener("click", _ => { characterRandom(); attacksRandom(); });
+    buttons.next.addEventListener("click", _ => { characterIndexUpdate();});
+    buttons.prev.addEventListener("click", _ => { characterIndexUpdate(-1);});
+    buttons.share.addEventListener("click", _ => { shareCard(); });
+    buttons.background.addEventListener("click", _ => { toggleBackgroundContainer(); });
 
     // Determinar eventos
     const touchAvailable = 'ontouchstart' in document.documentElement;
