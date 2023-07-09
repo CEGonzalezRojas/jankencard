@@ -701,28 +701,39 @@
         }}).then(async (canvas) => {
 
             const dataUrl = canvas.toDataURL();
-            const blob = await (await fetch(dataUrl)).blob();
-            const filesArray = [
-                new File(
-                [blob],
-                `${getPlayerData("name","noname")}-jankencard.png`,
-                {
-                    type: blob.type,
-                    lastModified: new Date().getTime()
-                }
-                )
-            ];
 
-            const text = Localization.GetTranslate("main","shareText");
-            const shareData = {
-                title: "JanKenCard!",
-                text: text,
-                url: "https://card.jankenup.com/",
-                files: filesArray
-            };
-            navigator.clipboard.writeText("https://card.jankenup.com/");
-            navigator.share(shareData);
-            sentEvent(GEvents.card_share, {"language": Localization.GetSelectedLanguage()});
+            if(navigator.canShare){
+                const blob = await (await fetch(dataUrl)).blob();
+                const filesArray = [
+                    new File(
+                    [blob],
+                    `${getPlayerData("name","noname")}-jankencard.png`,
+                    {
+                        type: blob.type,
+                        lastModified: new Date().getTime()
+                    }
+                    )
+                ];
+    
+                const text = Localization.GetTranslate("main","shareText");
+                const shareData = {
+                    title: "JanKenCard!",
+                    text: text,
+                    url: "https://card.jankenup.com/",
+                    files: filesArray
+                };
+                navigator.clipboard.writeText("https://card.jankenup.com/");
+                navigator.share(shareData);
+                sentEvent(GEvents.card_share, {"language": Localization.GetSelectedLanguage()});
+            }
+            else{
+                var link = document.createElement("a");
+                document.body.appendChild(link);
+                link.download = `${getPlayerData("name","noname")}-jankencard.png`;
+                link.href = canvas.toDataURL();
+                link.target = '_blank';
+                link.click();
+            }
         });
     }
 
