@@ -71,6 +71,10 @@
         max: 100
     };
 
+    // Intervalo de sumatoria ataque
+    let attackSumInterval;
+    const attackSumIntervalDelta = 100;
+
     // Cambio de nombre
     const changeName = (name, save = true) => {
         nameDisplayer.dataset.text = name;
@@ -573,25 +577,39 @@
         const currentSum = attacks.rock + attacks.paper + attacks.scissors;
         switch(attack){
             case "rock":
-                if(attacks.scissors > 1){
+                if(attacks.scissors > 1 || attacks.paper > 1){
                     attacks.rock += 1;
-                    if( (attacks.rock + attacks.paper + attacks.scissors) > attacks.max) attacks.scissors -= 1;
+                    if( (attacks.rock + attacks.paper + attacks.scissors) > attacks.max) attacks[ attacks.scissors > 1? "scissors" : "paper" ] -= 1;
                 }
                 break;
             case "paper":
-                if(attacks.rock > 1){
+                if(attacks.rock > 1 || attacks.scissors > 1){
                     attacks.paper += 1;
-                    if( (attacks.rock + attacks.paper + attacks.scissors) > attacks.max) attacks.rock -= 1;
+                    if( (attacks.rock + attacks.paper + attacks.scissors) > attacks.max) attacks[ attacks.rock > 1? "rock" : "scissors" ] -= 1;
                 }
                 break;
             case "scissors":
-                if(attacks.paper > 1){
+                if(attacks.paper > 1 || attacks.rock > 1){
                     attacks.scissors += 1;
-                    if( (attacks.rock + attacks.paper + attacks.scissors) > attacks.max) attacks.paper -= 1;
+                    if( (attacks.rock + attacks.paper + attacks.scissors) > attacks.max) attacks[ attacks.paper > 1? "paper" : "rock" ] -= 1;
                 }
                 break;
         }
         attacksUpdate(attacks.rock, attacks.paper, attacks.scissors);
+        
+        if(!attackSumInterval) attackSumIntervalInit(attack);
+    };
+
+    const attackSumIntervalInit = (attack) => {
+        attackSumIntervalStop();
+        attackSumInterval = setInterval( _ => {
+            attackSum(attack);
+        }, attackSumIntervalDelta);
+    } 
+
+    const attackSumIntervalStop = _ => {
+        clearInterval(attackSumInterval);
+        attackSumInterval = null;
     };
 
     // Compartir card
@@ -640,9 +658,15 @@
     document.querySelector("[data-action=share]").addEventListener("click", _ => {
         shareCard();
     })
-    rockTarget.addEventListener("click", _ => { attackSum("rock"); });
-    paperTarget.addEventListener("click", _ => { attackSum("paper"); });
-    scissorsTarget.addEventListener("click", _ => { attackSum("scissors"); });
+    rockTarget.addEventListener("mousedown", _ => { attackSum("rock"); });
+    rockTarget.addEventListener("mouseup", _ => { attackSumIntervalStop(); });
+    rockTarget.addEventListener("mouseleave", _ => { attackSumIntervalStop(); });
+    paperTarget.addEventListener("mousedown", _ => { attackSum("paper"); });
+    paperTarget.addEventListener("mouseup", _ => { attackSumIntervalStop(); });
+    paperTarget.addEventListener("mouseleave", _ => { attackSumIntervalStop(); });
+    scissorsTarget.addEventListener("mousedown", _ => { attackSum("scissors"); });
+    scissorsTarget.addEventListener("mouseup", _ => { attackSumIntervalStop(); });
+    scissorsTarget.addEventListener("mouseleave", _ => { attackSumIntervalStop(); });
 
     // Obtencion y guardado de datos
     const setPlayerData = (key, value) => {
