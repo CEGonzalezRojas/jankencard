@@ -19,6 +19,7 @@
     })();
 
     // Elementos comunes
+    const pageTitle = document.querySelector(".title");
     const container = document.querySelector(".container");
     const card = document.querySelector(".card");
     const cardBackground = card.querySelector(".background");
@@ -74,6 +75,11 @@
     // Intervalo de sumatoria ataque
     let attackSumInterval;
     const attackSumIntervalDelta = 100;
+
+    // Legenda en titulo
+    tippy( pageTitle, {
+        content: Localization.GetTranslate("main", "legend")
+    });
 
     // Cambio de nombre
     const changeName = (name, save = true) => {
@@ -701,6 +707,23 @@
     buttons.prev.addEventListener("click", _ => { characterIndexUpdate(-1);});
     buttons.share.addEventListener("click", _ => { shareCard(); });
     buttons.background.addEventListener("click", _ => { toggleBackgroundContainer(); });
+
+    tippy(buttons.random, {
+        content: Localization.GetTranslate("main","random")
+    });
+    tippy(buttons.next, {
+        content: Localization.GetTranslate("main","next")
+    });
+    tippy(buttons.prev, {
+        content: Localization.GetTranslate("main","prev")
+    });
+    tippy(buttons.share, {
+        content: Localization.GetTranslate("main","share")
+    });
+    tippy(buttons.background, {
+        content: Localization.GetTranslate("main","background")
+    });
+
 
     // Determinar eventos
     const touchAvailable = 'ontouchstart' in document.documentElement;

@@ -118,16 +118,16 @@ body{
     animation: cardShowReverse .5s forwards ease-out;
 }
 
-.card .text{
+.text{
     position: relative;
     z-index: 1;
 }
 
-.card .text::before {
+.text::before {
     content: attr(data-text);
 }
 
-.card .text::after {
+.text::after {
     content: attr(data-text);
     position: absolute;
     left: 0;
@@ -357,6 +357,13 @@ body{
     border: var(--card-padding) solid var(--white);
     border-radius: var(--card-radius);
     pointer-events: none;
+}
+
+.title{
+    position: absolute;
+    top: 30px;
+    color: var(--blue);
+    font-size: 2em;
 }
 
 /* Actions */

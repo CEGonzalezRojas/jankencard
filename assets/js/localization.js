@@ -11,41 +11,56 @@ class Localization{
 
             en: {
                 name: "Name",
-                share: "Share",
-                change: "Change",
                 team: "Team {0}",
                 rock: "Rock",
                 paper: "Paper",
                 scissors: "Scissors",
                 shareText: "This is my JanKenUP card! Create yours at https://card.jankenup.com",
+                title: "JanKenUp! Card",
                 pageTitle: "JanKenUp! Card - Humita Games",
-                pageDescription: "Create your own JanKenUP card!"
+                pageDescription: "Create your own JanKenUP card!",
+                share: "Share",
+                random: "Random",
+                next: "Next",
+                prev: "Previous",
+                background: "Toggle FX",
+                legend: "Customize your player card. Write your name, distribute attack points, and choose your main character. Share it on your social media and invite your friends to create theirs!"
             },
 
             es: {
                 name: "Nombre",
-                share: "Compartir",
-                change: "Cambiar",
-                team: "Equipo {0}",
                 rock: "Piedra",
                 paper: "Papel",
                 scissors: "Tijeras",
                 shareText: "Esta es mi carta de JanKenUP! Crea la tuya en https://card.jankenup.com",
+                title: "Carta JanKenUp!",
                 pageTitle: "Carta JanKenUp! - Humita Games",
-                pageDescription: "¡Crea tu propia carta de JanKenUP!"
+                pageDescription: "¡Crea tu propia carta de JanKenUP!",
+                share: "Compartir",
+                random: "Al azar",
+                team: "Equipo {0}",
+                next: "Anterior",
+                prev: "Siguiente",
+                background: "Alternar FX",
+                legend: "Personaliza tu carta de jugador. Escribe tu nombre, distribuye puntos de ataque y elige a tu personaje principal. ¡Compártelo en tus redes e invita a tus amigos a crear las suyas!"
             },
 
             ja: {
                 name: "名前",
-                share: "共有",
-                change: "ランダム",
                 team: "{0}団",
                 rock: "グー",
                 paper: "パー",
                 scissors: "チョキ",
+                title: "JanKenUP！ カード",
                 shareText: "これは私のJanKenUPカードです！https://card.jankenup.com であなたのカードを作成してください。",
                 pageTitle: "JanKenUP！ カード - Humita ゲーム",
-                pageDescription: "自分だけのJanKen UPカードを作ろう！"
+                pageDescription: "自分だけのJanKen UPカードを作ろう！",
+                share: "共有",
+                random: "ランダム",
+                next: "次",
+                prev: "前",
+                background: "FXトグル",
+                legend: "プレイヤーカードをカスタマイズしましょう。お名前を書き込み、攻撃ポイントを配分し、メインキャラクターを選びましょう。それをSNSで共有し、友達にも作成するように招待しましょう！"
             }
 
         }
@@ -56,7 +71,7 @@ class Localization{
     static GetTranslate( page, key, values, element, attributeTarget ){
         
         let language = navigator.language.toLowerCase();
-
+language = "ja";
         // Permitiremos ciertos lenguajes con su codigo completo
         if( Localization.allowedCompoundLanguage.indexOf(language) == -1 ) language = language.split("-")[0];
         if( Localization.validLanguage.indexOf(language) == -1 ) language = Localization.validLanguage[0]; 
