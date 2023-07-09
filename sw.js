@@ -1,4 +1,4 @@
-const cacheName = "jankenup-card-v9";
+const cacheName = "jankenup-card-v10";
 const assets = [
     "/",
     "/index.html",
