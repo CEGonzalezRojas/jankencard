@@ -19,7 +19,7 @@ class Localization{
                 scissors: "Scissors",
                 shareText: "This is my JanKenUP card! Create yours at https://card.jankenup.com",
                 pageTitle: "JanKenUp! Card - Humita Games",
-                pageDescription: "Create your own JanKen UP card!"
+                pageDescription: "Create your own JanKenUP card!"
             },
 
             es: {
