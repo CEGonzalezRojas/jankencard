@@ -57,7 +57,7 @@ html,body{
 }
 
 html{
-    background-color: #4cbcf8;
+    background-color: var(--white);
 }
 
 body{

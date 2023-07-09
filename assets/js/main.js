@@ -296,7 +296,7 @@
                 footer: '--card-green-b',
                 cardEffect: 0x5f856f
             },
-            mask: "/assets/images/others/mask/card-mask-gray-b.png",
+            mask: "/assets/images/others/mask/card-mask-green-c.png",
             stats: {
                 right: "20px",
                 top: "40%"
@@ -367,7 +367,7 @@
                 footer: '--card-purple-b',
                 cardEffect: 0x57698e
             },
-            mask: "/assets/images/others/mask/card-mask-purple.png",
+            mask: "/assets/images/others/mask/card-mask-purple-c.png",
             stats: {
                 bottom: "0"
             }
@@ -384,7 +384,7 @@
                 footer: '--card-blue-b',
                 cardEffect: 0x393459
             },
-            mask: "/assets/images/others/mask/card-mask-blue.png",
+            mask: "/assets/images/others/mask/card-mask-blue-e.png",
             stats: {
                 top: "30%"
             }
@@ -401,7 +401,7 @@
                 footer: '--card-pink-b',
                 cardEffect: 0xd34c41
             },
-            mask: "/assets/images/others/mask/card-mask-pink.png",
+            mask: "/assets/images/others/mask/card-mask-pink-c.png",
             stats: {
                 top: "25%",
                 right: "20px",
@@ -415,11 +415,11 @@
                 top: "144px"
             },
             colors: {
-                card: '--card-red-a',
-                footer: '--card-red-b',
-                cardEffect: 0xba2626
+                card: '--card-sky-a',
+                footer: '--card-sky-b',
+                cardEffect: 0x709aa3
             },
-            mask: "/assets/images/others/mask/card-mask-red.png",
+            mask: "/assets/images/others/mask/card-mask-sky-b.png",
             stats: {
                 top: "30%"
             }
@@ -432,11 +432,11 @@
                 bottom: "-112px"
             },
             colors: {
-                card: '--card-red-a',
-                footer: '--card-red-b',
-                cardEffect: 0xba2626
+                card: '--card-yellow-a',
+                footer: '--card-yellow-b',
+                cardEffect: 0xce8d2d
             },
-            mask: "/assets/images/others/mask/card-mask-red.png",
+            mask: "/assets/images/others/mask/card-mask-yellow-b.png",
             stats: {
                 bottom: "20px"
             }
@@ -451,9 +451,9 @@
             colors: {
                 card: '--card-red-a',
                 footer: '--card-red-b',
-                cardEffect: 0xdba2626
+                cardEffect: 0x393459
             },
-            mask: "/assets/images/others/mask/card-mask-red.png",
+            mask: "/assets/images/others/mask/card-mask-blue-d.png",
             stats: {
                 top: "25%"
             }
