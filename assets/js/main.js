@@ -71,6 +71,10 @@
         max: 100
     };
 
+    // Intervalo de sumatoria ataque
+    let attackSumInterval;
+    const attackSumIntervalDelta = 100;
+
     // Cambio de nombre
     const changeName = (name, save = true) => {
         nameDisplayer.dataset.text = name;
@@ -573,25 +577,39 @@
         const currentSum = attacks.rock + attacks.paper + attacks.scissors;
         switch(attack){
             case "rock":
-                if(attacks.scissors > 1){
+                if(attacks.scissors > 1 || attacks.paper > 1){
                     attacks.rock += 1;
-                    if( (attacks.rock + attacks.paper + attacks.scissors) > attacks.max) attacks.scissors -= 1;
+                    if( (attacks.rock + attacks.paper + attacks.scissors) > attacks.max) attacks[ attacks.scissors > 1? "scissors" : "paper" ] -= 1;
                 }
                 break;
             case "paper":
-                if(attacks.rock > 1){
+                if(attacks.rock > 1 || attacks.scissors > 1){
                     attacks.paper += 1;
-                    if( (attacks.rock + attacks.paper + attacks.scissors) > attacks.max) attacks.rock -= 1;
+                    if( (attacks.rock + attacks.paper + attacks.scissors) > attacks.max) attacks[ attacks.rock > 1? "rock" : "scissors" ] -= 1;
                 }
                 break;
             case "scissors":
-                if(attacks.paper > 1){
+                if(attacks.paper > 1 || attacks.rock > 1){
                     attacks.scissors += 1;
-                    if( (attacks.rock + attacks.paper + attacks.scissors) > attacks.max) attacks.paper -= 1;
+                    if( (attacks.rock + attacks.paper + attacks.scissors) > attacks.max) attacks[ attacks.paper > 1? "paper" : "rock" ] -= 1;
                 }
                 break;
         }
         attacksUpdate(attacks.rock, attacks.paper, attacks.scissors);
+        
+        if(!attackSumInterval) attackSumIntervalInit(attack);
+    };
+
+    const attackSumIntervalInit = (attack) => {
+        attackSumIntervalStop();
+        attackSumInterval = setInterval( _ => {
+            attackSum(attack);
+        }, attackSumIntervalDelta);
+    } 
+
+    const attackSumIntervalStop = _ => {
+        clearInterval(attackSumInterval);
+        attackSumInterval = null;
     };
 
     // Compartir card
@@ -623,9 +641,14 @@
                 }
                 )
             ];
+            const text = Localization.GetTranslate("main","shareText");
             const shareData = {
-                files: filesArray,
+                title: "JanKenCard!",
+                text: text,
+                url: "https://card.jankenup.com/",
+                files: filesArray
             };
+            navigator.clipboard.writeText(text);
             navigator.share(shareData);
         });
     }
@@ -635,9 +658,22 @@
     document.querySelector("[data-action=share]").addEventListener("click", _ => {
         shareCard();
     })
-    rockTarget.addEventListener("click", _ => { attackSum("rock"); });
-    paperTarget.addEventListener("click", _ => { attackSum("paper"); });
-    scissorsTarget.addEventListener("click", _ => { attackSum("scissors"); });
+
+    // Determinar eventos
+    const touchAvailable = 'ontouchstart' in document.documentElement;
+    const eventStart = touchAvailable? "touchstart" : "mousedown";
+    const eventEnd = touchAvailable? "touchend" : "mouseup";
+    const eventMove = touchAvailable? "touchmove" : "mouseleave";
+
+    rockTarget.addEventListener(eventStart, _ => { attackSum("rock"); });
+    rockTarget.addEventListener(eventEnd, _ => { attackSumIntervalStop(); });
+    rockTarget.addEventListener(eventMove, _ => { attackSumIntervalStop(); });
+    paperTarget.addEventListener(eventStart, _ => { attackSum("paper"); });
+    paperTarget.addEventListener(eventEnd, _ => { attackSumIntervalStop(); });
+    paperTarget.addEventListener(eventMove, _ => { attackSumIntervalStop(); });
+    scissorsTarget.addEventListener(eventStart, _ => { attackSum("scissors"); });
+    scissorsTarget.addEventListener(eventEnd, _ => { attackSumIntervalStop(); });
+    scissorsTarget.addEventListener(eventMove, _ => { attackSumIntervalStop(); });
 
     // Obtencion y guardado de datos
     const setPlayerData = (key, value) => {
